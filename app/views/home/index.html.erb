@@ -1,4 +1,11 @@
+<body style="background-color:lightgray;">
 <h1 color=navy>SealTheDeal</h1>  <<%= image_tag  "desenhofoca4.png" %>>
 
 <div>
+<% if user_signed_in? %>
+<%= link_to 'Sair', destroy_user_session_path, method: :delete %>
+<% else %>
 <%= link_to 'Fazer login', new_user_session_path %>
+<% end %>
+</div>
+</body>
