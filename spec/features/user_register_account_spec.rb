@@ -1,9 +1,9 @@
 require 'rails_helper'
 
-feature 'Coop register new account' do
+feature 'User register new account' do
     scenario 'successfully' do
         #arrange
-        
+       
         #act
         visit root_path
         click_on 'Fazer login'
@@ -16,7 +16,7 @@ feature 'Coop register new account' do
         
         #assert
         expect(page).to have_content('Bem vindo! Você realizou seu registro com sucesso')
-        expect(page).to have_link('Fazer login')
+        expect(page).not_to have_link('Fazer login')
 
     
     end
@@ -39,5 +39,6 @@ feature 'Coop register new account' do
        expect(page).to have_content("Senha não pode ficar em branco")
 
     end   
+
 
 end
