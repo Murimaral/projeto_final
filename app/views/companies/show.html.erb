@@ -1,0 +1,11 @@
+<div>
+<h3><%= @company.name %></h3>
+<dl>
+<dt>Nº do CNPJ:</dt>
+<dd><%=@company.cnpj%></dd>
+<dt>Domínio de e-mail:</dt>
+<dd><%=@company.domain%></dd>
+</dl>
+</div>
+
+<%= link_to 'Voltar', companies_path %>

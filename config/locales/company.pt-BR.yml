@@ -1,0 +1,12 @@
+---
+pt-BR:
+  activerecord:
+    models:
+      company: 
+        one: "Empresa"
+        other: "Empresas"
+    attributes:
+      company:    
+        name: "Nome"
+        cnpj: "CNPJ"
+        domain: "Domínio"

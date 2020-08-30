@@ -1,0 +1,19 @@
+<h1>Parcerias</h1>
+
+<%= @companies.each do |company| %>
+<div>
+<h3><%= company.name %></h3>
+<dl>
+<dt>Nº do CNPJ:</dt>
+<dd><%=company.cnpj%></dd>
+<dt>Domínio de e-mail:</dt>
+<dd><%=company.domain%></dd>
+</dl>
+</div>
+<%end%>
+<div>
+<%= link_to 'Cadastrar nova empresa', new_company_path %>
+</div>
+<div>
+<%= link_to 'Voltar', root_path %>
+</div>

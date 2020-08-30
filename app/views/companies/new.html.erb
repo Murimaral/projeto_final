@@ -1,0 +1,27 @@
+<div>
+<% if @company.errors.present? %>
+<% @company.errors.full_messages.each do |e| %>
+<p><%= e %></p>
+<% end %>
+<%end%>
+</div>
+
+
+
+<%= form_with model: @company, local:true do |f| %>
+<div>
+<%= f.label :name, 'Nome da empresa' %>
+<%= f.text_field :name %>
+</div>
+<div>
+<%= f.label :cnpj, 'nº do CNPJ' %>
+<%= f.text_field :cnpj %>
+</div>
+<div>
+<%= f.label :domain, 'Domínio do email' %>
+<%= f.text_field :domain %>
+</div>
+<div>
+<%= f.submit 'Finalizar Cadastro' %>
+</div>
+<% end %>

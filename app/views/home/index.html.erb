@@ -8,5 +8,8 @@
 <%= link_to 'Fazer login', new_user_session_path %>
 <% end %>
 </div>
-
+<div>
+<% if user_signed_in? && current_user.admin? %>
+<%= link_to 'Ver empresas parceiras', companies_path %>
+<% end %>
 </body>
