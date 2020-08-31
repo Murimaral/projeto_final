@@ -16,12 +16,14 @@ feature 'user complete his register' do
         click_on 'Preencha aqui seus dados e navegue sem restrições!'
         fill_in 'Nome completo', with: 'Zé Colmeia'
         fill_in 'Nome social', with: 'Colmeia'
+        fill_in 'Data de nascimento', with: '13/10/1990'
+        fill_in 'CPF', with: '399.479.898-10'
         fill_in 'Endereço', with: 'Rua Urumajo'
         fill_in 'Cargo atual', with: 'Guarda'
         click_on 'Completar meu cadastro e zarpar!'
 
         #assert
-        expect(page).to have_content('Ahoy! Seja Bem-vindo à bordo, Colmeia')
+        expect(page).to have_content('Ahoy! Seja Bem-vindo(a) à bordo, Colmeia')
         expect(page).to have_link('Sair')
     end
 end

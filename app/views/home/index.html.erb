@@ -1,6 +1,10 @@
 <body style="background-color:lightgray;">
 <h1 color=navy>SealTheDeal</h1>  <<%= image_tag  "desenhofoca4.png" %>>
-
+<div>
+<% if user_signed_in? && current_user.visitor? %>
+<%= link_to 'Preencha aqui seus dados e navegue sem restrições!', new_colaborator_path %>
+<% end %>
+</div>
 <div>
 <% if user_signed_in? %>
 <%= link_to 'Sair', destroy_user_session_path, method: :delete %>
@@ -12,4 +16,6 @@
 <% if user_signed_in? && current_user.admin? %>
 <%= link_to 'Ver empresas parceiras', companies_path %>
 <% end %>
+</div>
+
 </body>

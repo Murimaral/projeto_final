@@ -3,6 +3,6 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-
-   enum permission: {visitor: 0, colaborator: 1, admin: 2}      
+  has_one :colaborator
+   enum permission: {visitor: 0, colab: 1, admin: 2}      
 end
