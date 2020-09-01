@@ -4,8 +4,10 @@ class ColaboratorsController < ApplicationController
    end 
    def create
       @colaborator = Colaborator.new(colab_params)
-      if @colaborator.save!
+      if @colaborator.save
+        @colaborator.user.colab!
         redirect_to root_path, notice: "Ahoy! Seja Bem-vindo(a) à bordo, #{@colaborator.social_name}"
+
       else
         render :new
       end   

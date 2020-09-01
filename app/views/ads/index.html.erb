@@ -1,0 +1,21 @@
+<%if @ads.empty? %>
+<h1>Parabéns, não há anunciantes antes de você, que tal começar?</h1> 
+<% else %>
+
+<h1>Não se acanhe, navegue à vontade!</h1>
+<% @ads.each do |ad| %>
+<div>
+<h3><%= ad.name %></h3>
+<dl>
+<dt>Categoria:</dt>
+<dd><%=ad.category%></dd>
+<dt>Informações:</dt>
+<dd><%=ad.description%></dd>
+<dt>Valor:</dt>
+<dd><%=number_to_currency ad.cost %></dd>
+</dl>
+</div>
+<% end %>
+<%end%>
+
+<%= link_to 'Criar novo anúncio', new_ad_path %>

@@ -1,0 +1,12 @@
+<div>
+<h3><%= @ad.name %></h3>
+<dl>
+<dt>Categoria:</dt>
+<dd><%=@ad.category%></dd>
+<dt>Informações:</dt>
+<dd><%=@ad.description%></dd>
+<dt>Valor:</dt>
+<dd><%=number_to_currency @ad.cost %></dd>
+</dl>
+</div>
+<%= link_to 'Continuar navegando', ads_path %>

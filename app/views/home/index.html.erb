@@ -17,5 +17,10 @@
 <%= link_to 'Ver empresas parceiras', companies_path %>
 <% end %>
 </div>
+<div>
+<%if user_signed_in? && !current_user.visitor? %>
+<%=link_to 'Velejar pelas ofertas',ads_path %>
+<%end%>
 
+</div>
 </body>

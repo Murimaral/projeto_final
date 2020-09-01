@@ -44,4 +44,25 @@ feature 'Admin register new company' do
     expect(page).to have_content('Domínio não pode ficar em branco')
     end 
 
+    
+    scenario 'but CNPJ is not valid' do
+
+        #arrange
+        login_admin()
+        #act
+        visit root_path
+        click_on 'Ver empresas parceiras'
+        click_on 'Cadastrar nova empresa'
+        fill_in 'Nome da empresa', with: 'Alpha'
+        #find_field('Nome da empresa').set('Alpha')
+        fill_in 'nº do CNPJ', with: '4094832094809'
+        fill_in 'Domínio do email', with: '@alpha.com'
+        click_on 'Finalizar Cadastro'
+        #assert
+        expect(page).to have_content('CNPJ inválido')
+        expect(page).not_to have_content('Cadastro realizado com sucesso!')
+   
+        
+       end
+
 end

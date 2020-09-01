@@ -1,3 +1,9 @@
+<% if @colaborator.errors.any? %>
+<%= @colaborator.errors.full_messages.each do |e| %>
+<p><%= e%></p>
+<%end%>
+<% end %>
+
 <h3>Meus dados pessoais</h3>
 
 <%= form_with model: @colaborator, local:true do |f| %>

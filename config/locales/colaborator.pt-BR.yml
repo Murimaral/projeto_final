@@ -1,0 +1,15 @@
+---
+pt-BR:
+  activerecord:
+    models:
+      colaborator: 
+        one: "Colaborador"
+        other: "Colaboradores"
+    attributes:
+      colaborator:    
+        name: "Nome"
+        social_name: "Nome social"
+        birth_date: "Data de nascimento"
+        cpf: "CPF"
+        address: "Endereço"
+        role: "Cargo atual"

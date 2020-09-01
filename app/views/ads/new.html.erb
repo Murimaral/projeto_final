@@ -1,0 +1,22 @@
+<%= form_with model: @ad, local: true do |f| %>
+
+<div>
+<%= f.label :name, 'Nome do produto' %>
+<%= f.text_field :name %>
+</div>
+<div>
+<%= f.label :category, 'Categoria' %>
+<%= f.text_field :category %>
+</div>
+<div>
+<%= f.label :description, 'Informações do produto' %>
+<%= f.text_field :description %>
+</div>
+<div>
+<%= f.label :cost, 'Preço' %>
+<%= f.number_field :cost, min:0 %>
+</div>
+<div>
+<%= f.submit 'Anunciar' %>
+</div>
+<% end %>
