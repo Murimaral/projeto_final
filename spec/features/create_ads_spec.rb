@@ -43,10 +43,129 @@ feature 'Registered user creates an ad' do
         expect(page).to have_content('Anúncio feito com sucesso!')
         expect(page).to have_link('Continuar navegando')
 
-
+        
 
         
     end 
+
+    scenario 'but important fields are missing' do
+
+        #arrange
+        company_a = Company.create!(name: 'Alpha', 
+                         cnpj: '63.297.410/6617-31', domain: '@alpha.com' )
+        company_b = Company.create!(name: 'Beta', 
+        cnpj: '24.480.483/5611-63', domain: '@beta.com' )
+                        
+
+        user = User.create!( email: 'colaborador@alpha.com',
+        password: '12345678')
+
+       
+        login_as user, scope: :user
+        colabo = Colaborator.create!(name: 'Ze Colmeia', social_name: 'Colmeia', birth_date: '13/10/1990',
+                                    cpf: '39947989810', address: 'Rua Urumajo', role: 'Guardinha', 
+                                    company: company_a, user: user)
+                                
+
+        colabo.user.colab!
+        #act
+        
+        visit root_path
+        
+        click_on 'Velejar pelas ofertas'
+        click_on 'Criar novo anúncio'
+        fill_in 'Nome do produto',with: ''
+        fill_in 'Categoria',with: ''
+        fill_in 'Informações do produto',with: 'Escrivaninha velha porem boa, aceito pagamento em VR'    
+        fill_in 'Preço', with: ''
+        click_on 'Anunciar'
+        
+        #byebug
+        #assert
+        expect(page).to have_content('Nome do produto não pode ficar em branco')
+        expect(page).to have_content('Categoria não pode ficar em branco')
+        expect(page).to have_content('Preço não pode ficar em branco')
+
+        
+
+        
+    end 
+    
+    scenario 'and later make some changes' do
+
+          #arrange
+          company_a = Company.create!(name: 'Alpha', 
+                         cnpj: '63.297.410/6617-31', domain: '@alpha.com' )
+        company_b = Company.create!(name: 'Beta', 
+        cnpj: '24.480.483/5611-63', domain: '@beta.com' )
+                        
+
+        user = User.create!( email: 'colaborador@alpha.com',
+        password: '12345678', permission: :colab)
+
+       
+        login_as user, scope: :user
+        colabo = Colaborator.create!(name: 'Ze Colmeia', social_name: 'Colmeia', birth_date: '13/10/1990',
+                                    cpf: '39947989810', address: 'Rua Urumajo', role: 'Guardinha', 
+                                    company: company_a, user: user)
+
+        ad = Ad.create!(name: 'Escrivaninha', category: 'escritorio',
+                        description: 'Velha porem boa', cost: 50, 
+                        colaborator: colabo)
+                        
+       
+        
+        #act     
+        visit ad_path(ad.id)
+        click_on 'Editar anúncio'
+        fill_in 'Nome do produto',with: 'Mesa de centro'
+        fill_in 'Categoria',with: 'Lar'
+        fill_in 'Informações do produto',with: 'Mesa de centro mas pode por nos cantos também'    
+        fill_in 'Preço', with: 100
+        click_on 'Anunciar'
+
+        #assert
+        expect(page).to have_content('Mesa de centro')
+        expect(page).to have_content('Lar')
+        expect(page).to have_content('Mesa de centro mas pode por nos cantos também')
+        expect(page).to have_content('R$ 100,00')
+        expect(page).to have_content('Alterações salvas com sucesso!')
+       
+    end
+
+    scenario 'and destroys it' do
+
+      #arrange
+      company_a = Company.create!(name: 'Alpha', 
+                       cnpj: '63.297.410/6617-31', domain: '@alpha.com' )
+      company_b = Company.create!(name: 'Beta', 
+      cnpj: '24.480.483/5611-63', domain: '@beta.com' )
+                      
+
+      user = User.create!( email: 'colaborador@alpha.com',
+      password: '12345678', permission: :colab)
+
+     
+      login_as user, scope: :user
+      colabo = Colaborator.create!(name: 'Ze Colmeia', social_name: 'Colmeia', birth_date: '13/10/1990',
+                                  cpf: '39947989810', address: 'Rua Urumajo', role: 'Guardinha', 
+                                  company: company_a, user: user)
+
+      ad = Ad.create!(name: 'Escrivaninha', category: 'escritorio',
+                      description: 'Velha porem boa', cost: 50, 
+                      colaborator: colabo)
+                      
+     
+      
+      #act     
+      visit ad_path(ad.id)
+      click_on 'Apagar anúncio'
+
+      expect(current_path).to eq ads_path
+      expect(page).to have_content 'Não há anúncios'
+
+    end
+
     
 end 
 

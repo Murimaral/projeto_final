@@ -9,4 +9,10 @@
 <dd><%=number_to_currency @ad.cost %></dd>
 </dl>
 </div>
+<% if current_user.id == @ad.colaborator.user.id %>
+<%= link_to 'Editar anúncio', edit_ad_path(@ad)%>
+<%= link_to 'Apagar anúncio', ad_path(@ad), method: :delete, data: {
+    confirm: 'Gostaria de apagar este anúncio?'} %>
+<%end%>
 <%= link_to 'Continuar navegando', ads_path %>
+

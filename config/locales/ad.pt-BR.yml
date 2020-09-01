@@ -1,0 +1,15 @@
+---
+pt-BR:
+  activerecord:
+    models:
+      ad: 
+        one: "Anúncio"
+        other: "Anúncios"
+    attributes:
+      ad:    
+        name: "Nome do produto"
+        category: "Categoria"
+        description: "Informações do produto"
+        cost: "Preço"
+        colaborator_id: "Colaborador"
+        colaborator: "Colaborador"
