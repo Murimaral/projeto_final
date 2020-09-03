@@ -1,0 +1,13 @@
+---
+pt-BR:
+  activerecord:
+    models:
+      question: 
+        one: "Pergunta"
+        other: "Perguntas"
+    attributes:
+      question:    
+        ask: "Pergunta"
+        answer: "Resposta"
+        ad_id: "Anúncio"
+        ad: "Anúncio"

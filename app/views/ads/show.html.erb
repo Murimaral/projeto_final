@@ -13,6 +13,11 @@
 <%= link_to 'Editar anúncio', edit_ad_path(@ad)%>
 <%= link_to 'Apagar anúncio', ad_path(@ad), method: :delete, data: {
     confirm: 'Gostaria de apagar este anúncio?'} %>
-<%end%>
+<% end %>
+<div>
+<%= link_to 'Perguntas sobre o produto', ad_questions_path(@ad) %>    
+</div>
+<div>
 <%= link_to 'Continuar navegando', ads_path %>
+</div>
 

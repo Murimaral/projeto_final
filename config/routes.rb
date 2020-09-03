@@ -5,5 +5,11 @@ Rails.application.routes.draw do
    resources :companies, :colaborators
    resources :ads do
     get 'owned',on: :collection
+    resources :questions
    end
 end
+
+
+#resources ‘collaborator’, only: [:show] do
+ # get ‘products’, on: :member
+  #end

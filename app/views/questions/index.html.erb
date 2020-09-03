@@ -1,0 +1,25 @@
+<h2><%= "Aproximem-se mercadores! Tirem suas dúvidas diretamente com #{@ad.colaborator.social_name}"%> </h2>
+
+<h3><%= "#{@ad.name} - #{number_to_currency @ad.cost}"%></h3>
+<% @questions.each do |question| %>
+<div>
+<dl>
+<dt><%= question.ask %></dt>
+<%if question.answer.blank? %>
+<dd>Aguardando resposta do vendedor<dd>
+<% if @ad.colaborator.id == current_user.colaborator.id %>
+<%= link_to 'Responder marujo', edit_ad_question_path(@ad, question) %></dd>
+<!-- = link_to 'Apagar pergunta', blo_path  -->
+<%end%>
+<% else %>
+<dd><%=question.answer%></dd>
+<%end%>
+<% end%>
+</dl>
+</div>
+<% if @ad.colaborator.id != current_user.colaborator.id %>
+<div>
+<h3>Não achou a informação que procurava?</h3>
+<%= link_to 'Perguntar ao vendedor', new_ad_question_path(@ad) %>
+</div>
+<%end%>

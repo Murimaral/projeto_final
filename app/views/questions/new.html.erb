@@ -1,0 +1,22 @@
+
+<div>
+<% if @question.errors.present? %>
+<% @question.errors.full_messages.each do |e| %>
+<p><%= e %></p>
+<% end %>
+<%end%>
+</div>
+
+
+<%= form_with model: [@ad, @question], local:true do |f| %>
+<div>
+<dl>
+
+<dt><%= f.label :ask, 'Escreva aqui sua pergunta' %></dt>
+<dd><%= f.text_field :ask %>
+</div>
+<div>
+<%= f.submit 'Enviar pergunta' %>
+</div>
+<%end%>
+

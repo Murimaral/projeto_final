@@ -1,0 +1,15 @@
+
+
+
+<%= form_with model: [@ad, @question], local:true do |f| %>
+<div>
+<dl>
+
+<dt><%= f.label :answer, 'Escreva sua resposta aqui' %></dt>
+<dd><%= f.text_field :answer %>
+</div>
+<div>
+<%= f.submit 'Enviar resposta' %>
+</div>
+<%end%>
+
