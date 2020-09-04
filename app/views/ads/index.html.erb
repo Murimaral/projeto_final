@@ -15,6 +15,17 @@
 <dd><%=number_to_currency ad.cost %></dd>
 <dt>Mais informações<dt>
 <dd><%= link_to 'Mais detalhes', ad %></dd>
+<%if !ad.negociations.empty? %>
+<dt>Tem marujo querendo selar um trato com você! Clique para ver negociação: </dt>
+<% ad.negociations.each do |negociation| %>
+<% if negociation.answer.blank? %>
+<dd><%=link_to "Responder proposta de #{negociation.colaborator.social_name}", ad_negociations_path(ad)%></dd>
+<%else%>
+<dd><%=link_to "Ver negociação com #{negociation.colaborator.social_name}", ad_negociations_path(ad)%></dd>
+<%end%>
+<%end%>
+<%end%>
+
 </dl>
 </div>
 

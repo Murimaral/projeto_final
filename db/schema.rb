@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_02_230651) do
+ActiveRecord::Schema.define(version: 2020_09_03_231252) do
 
   create_table "ads", force: :cascade do |t|
     t.string "name"
@@ -49,6 +49,18 @@ ActiveRecord::Schema.define(version: 2020_09_02_230651) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "negociations", force: :cascade do |t|
+    t.integer "ad_id", null: false
+    t.integer "colaborator_id", null: false
+    t.string "ask"
+    t.string "answer"
+    t.decimal "current_price"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["ad_id"], name: "index_negociations_on_ad_id"
+    t.index ["colaborator_id"], name: "index_negociations_on_colaborator_id"
+  end
+
   create_table "questions", force: :cascade do |t|
     t.string "ask"
     t.integer "ad_id", null: false
@@ -74,5 +86,7 @@ ActiveRecord::Schema.define(version: 2020_09_02_230651) do
   add_foreign_key "ads", "colaborators"
   add_foreign_key "colaborators", "companies"
   add_foreign_key "colaborators", "users"
+  add_foreign_key "negociations", "ads"
+  add_foreign_key "negociations", "colaborators"
   add_foreign_key "questions", "ads"
 end

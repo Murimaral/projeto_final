@@ -3,6 +3,7 @@ class Colaborator < ApplicationRecord
   belongs_to :user
   has_many :ad
   has_many :questions, through: :ads 
+  has_many :negociations
 
   validates :name, :social_name, :birth_date, :cpf,
             :address, :role, presence: true

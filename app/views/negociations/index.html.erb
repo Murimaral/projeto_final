@@ -1,0 +1,29 @@
+<h2>Aqui pode-se negociar à vontade em particular! E quem sabe</h2>
+<h3>Selar o trato</h3>
+
+<div>
+<%= @negociations.each do |negociation| %>
+<dl>
+<div>
+<dt><%= "#{negociation.colaborator.social_name}:"%></dt>
+<dd><%= "#{negociation.ask}"%></dd>
+</div>
+<div>
+<%if negociation.answer.blank? %>
+<p>Aguardando resposta do vendedor</p>
+<%if current_user.colaborator.id == @ad.colaborator.id %>
+<p><%= link_to 'Fazer contra-proposta', edit_ad_negociation_path(@ad, negociation)%></p>
+<%end%>
+<%else%>
+<dt><%= "#{@ad.colaborator.social_name}:"%></dt>
+<dd><%= "#{negociation.answer}"%></dd>
+</div>
+<%end%>
+<dt>Valor: </dt>
+<%if negociation.current_price.blank? %>
+<dd><%= number_to_currency @ad.cost%>
+<%else%>
+<dd><%= number_to_currency negociation.current_price %></dd>
+<%end%>
+</dl>
+<%end%>

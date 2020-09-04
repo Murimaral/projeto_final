@@ -20,6 +20,7 @@ class AdsController < ApplicationController
 
    def show
       @ad = Ad.find(params[:id])
+      @negociations = @ad.negociations.where(colaborator: current_user.colaborator)
    end
 
    def edit
@@ -57,7 +58,7 @@ def ad_params
 end
 def authentic_colab?
     if current_user.visitor?
-        fail('Você não tem permissão de acesso')
+        redirect_to root_path, alert: 'Você não tem permissão de acesso'
     end
 end
 def set_colab
