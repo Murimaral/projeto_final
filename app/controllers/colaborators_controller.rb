@@ -1,5 +1,6 @@
 class ColaboratorsController < ApplicationController
-   def new
+   before_action :id_of_company, only: [:new, :create]
+  def new
       @colaborator = Colaborator.new
    end 
    def create
@@ -17,11 +18,14 @@ class ColaboratorsController < ApplicationController
    def colab_params
       params.require(:colaborator).permit(:name, :social_name, :birth_date,
                                         :cpf, :address, :role).merge(user_id: current_user.id,
-                                        company_id: domain_look)
+                                        company_id: @company)
    end
-   def domain_look
-      Company.find_by(domain: current_user.email.match(/@.*/).to_s).id 
-  
+   def id_of_company
+      if  Company.find_by(domain: current_user.email.match(/@.*/).to_s).nil?
+          redirect_to root_path, alert: 'Não há empresa cadastrada com esse domínio'
+      else  
+         @company =  Company.find_by(domain: current_user.email.match(/@.*/).to_s).id 
+      end 
     end
 
 
