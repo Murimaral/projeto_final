@@ -13,6 +13,7 @@
 <p>Aguardando resposta do vendedor</p>
 <%if current_user.colaborator.id == @ad.colaborator.id %>
 <p><%= link_to 'Fazer contra-proposta', edit_ad_negociation_path(@ad, negociation)%></p>
+<p><%= link_to 'Oferta final de negociação', new_ad_negociation_deal_path(@ad, negociation) %>
 <%end%>
 <%else%>
 <dt><%= "#{@ad.colaborator.social_name}:"%></dt>

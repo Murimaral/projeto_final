@@ -1,0 +1,29 @@
+<body>
+<h3>Oferta de fechamento de negócio</h3>
+<h4>Dados da compra</h4>
+
+<dl>
+<dt>Comprador<dt>
+<dd><%= "#{@colaborator.social_name}"%></dd>
+<dd><%= "CPF: #{@colaborator.cpf}"%></dd>
+<dd><%= "Endereço: #{@colaborator.address}"%></dd>
+<dd><%= "Ocupa o cargo #{@colaborator.role} na empresa #{@colaborator.company.name}"%><dd>
+
+<dt>Vendedor<dt>
+<dd><%= "#{@ad.colaborator.social_name}"%></dd>
+<dd><%= "CPF: #{@ad.colaborator.cpf}"%></dd>
+<dd><%= "Endereço: #{@ad.colaborator.address}"%></dd>
+<dd><%= "Ocupa o cargo #{@ad.colaborator.role} na empresa #{@ad.colaborator.company.name}"%><dd>
+
+
+<dt>Produto</dt>
+<dd><%= "#{@ad.name}"%></dd>
+<dd><%= "Categoria: #{@ad.category}"%></dd>
+<dd><%= "Valor no anúncio: #{number_to_currency @ad.cost}"%></dd>
+<%= form_with model: [@ad,@negociation,@deal], local:true do |f| %>
+<dt><%= f.label :final_price, 'Valor de oferta' %></dt>
+<dd><%= f.number_field :final_price %></dd>
+<dd><%= f.submit 'Enviar oferta final'%></dd>
+<%end%>
+</body>
+

@@ -6,7 +6,9 @@ Rails.application.routes.draw do
    resources :ads do
     get 'owned',on: :collection
     resources :questions
-    resources :negociations
+    resources :negociations do
+      resources :deals 
+    end 
    end
 end
 

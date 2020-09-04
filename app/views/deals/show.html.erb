@@ -1,0 +1,28 @@
+<body>
+<h3>Oferta de fechamento de negócio</h3>
+<h4>Dados da compra</h4>
+
+<dl>
+<dt>Comprador<dt>
+<dd><%= "#{@colaborator.social_name}"%></dd>
+<dd><%= "CPF: #{@colaborator.cpf}"%></dd>
+<dd><%= "Endereço: #{@colaborator.address}"%></dd>
+<dd><%= "Ocupa o cargo #{@colaborator.role} na empresa #{@colaborator.company.name}"%><dd>
+
+<dt>Vendedor<dt>
+<dd><%= "#{@ad.colaborator.social_name}"%></dd>
+<dd><%= "CPF: #{@ad.colaborator.cpf}"%></dd>
+<dd><%= "Endereço: #{@ad.colaborator.address}"%></dd>
+<dd><%= "Ocupa o cargo #{@ad.colaborator.role} na empresa #{@ad.colaborator.company.name}"%><dd>
+
+
+<dt>Produto</dt>
+<dd><%= "#{@ad.name}"%></dd>
+<dd><%= "Categoria: #{@ad.category}"%></dd>
+<% if @deal.final_price.blank? %>
+<dt><%="Valor de oferta: #{number_to_currency @ad.cost}"%>
+<%else%>
+<dt><%= "Valor de oferta: #{number_to_currency @deal.final_price}" %></dt>
+<%end%>
+</body>
+
