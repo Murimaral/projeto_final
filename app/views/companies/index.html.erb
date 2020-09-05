@@ -1,3 +1,14 @@
+<% if user_signed_in? %>
+<div>
+<%if current_user.colaborator.present? %>
+<p><%= "Olá, #{current_user.colaborator.social_name}"%></p>
+<%end%>
+<%= link_to 'Sair', destroy_user_session_path, method: :delete %>
+</div>
+<%end%>
+
+
+
 <h1>Parcerias</h1>
 
 <%= @companies.each do |company| %>

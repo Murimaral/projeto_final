@@ -1,8 +1,17 @@
+<% if user_signed_in? %>
+<div>
+<%if !current_user.colaborator.nil? %>
+<p><%= "Olá, #{current_user.colaborator.social_name}"%></p>
+<%end%>
+<%= link_to 'Sair', destroy_user_session_path, method: :delete %>
+</div>
+<%end%>
+
 <h2>Aqui pode-se negociar à vontade em particular! E quem sabe</h2>
 <h3>Selar o trato</h3>
 
 <div>
-<%= @negociations.each do |negociation| %>
+<% @negociations.each do |negociation| %>
 <dl>
 <div>
 <dt><%= "#{negociation.colaborator.social_name}:"%></dt>
@@ -20,11 +29,12 @@
 <dd><%= "#{negociation.answer}"%></dd>
 </div>
 <%end%>
-<dt>Valor: </dt>
+<dt>Valor atual: </dt>
 <%if negociation.current_price.blank? %>
-<dd><%= number_to_currency @ad.cost%>
+<dd><%= number_to_currency @ad.cost%></dd>
 <%else%>
 <dd><%= number_to_currency negociation.current_price %></dd>
 <%end%>
 </dl>
 <%end%>
+<%= link_to 'Voltar', ad_path(@ad) %>

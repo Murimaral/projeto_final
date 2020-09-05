@@ -1,4 +1,11 @@
-
+<% if user_signed_in? %>
+<div>
+<%if !current_user.colaborator.nil? %>
+<p><%= "Olá, #{current_user.colaborator.social_name}"%></p>
+<%end%>
+<%= link_to 'Sair', destroy_user_session_path, method: :delete %>
+</div>
+<%end%>
 
 
 <%= form_with model: [@ad, @question], local:true do |f| %>
@@ -12,4 +19,7 @@
 <%= f.submit 'Enviar resposta' %>
 </div>
 <%end%>
+<div>
+<%= link_to 'Voltar', ad_questions_path(@ad)%>
+</div>
 

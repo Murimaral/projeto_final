@@ -30,6 +30,11 @@ before_action :set_negociations_params
         end
     
     end
+    def onlyus
+        @negociation = Negociation.find(params[:id])
+        @negociations = @ad.negociations.where(colaborator: @negociation.colaborator)
+        render :index
+    end
 
 
 

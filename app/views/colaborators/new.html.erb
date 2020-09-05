@@ -1,3 +1,14 @@
+<% if user_signed_in? %>
+<div>
+<%if current_user.colaborator.present? %>
+<p><%= "Olá, #{current_user.colaborator.social_name}"%></p>
+<%end%>
+<%= link_to 'Sair', destroy_user_session_path, method: :delete %>
+</div>
+<%end%>
+
+
+
 <% if @colaborator.errors.any? %>
 <%= @colaborator.errors.full_messages.each do |e| %>
 <p><%= e%></p>
@@ -35,3 +46,7 @@
 <%= f.submit 'Completar meu cadastro e zarpar!' %>
 </div>
 <% end %>
+<div>
+<%= link_to 'Cancelar', root_path%>
+</div>
+

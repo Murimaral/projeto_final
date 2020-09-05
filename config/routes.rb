@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     get 'owned',on: :collection
     resources :questions
     resources :negociations do
+      get 'onlyus', on: :member
       resources :deals 
     end 
    end

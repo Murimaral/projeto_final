@@ -1,3 +1,10 @@
+<% if user_signed_in? %>
+<div>
+<p><%= "Olá, #{current_user.colaborator.social_name}"%></p>
+</div>
+<%end%>
+
+
 <body>
 <h3>Oferta de fechamento de negócio</h3>
 <h4>Dados da compra</h4>

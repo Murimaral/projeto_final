@@ -1,3 +1,12 @@
+<% if user_signed_in? %>
+<div>
+<%if !current_user.colaborator.nil? %>
+<p><%= "Olá, #{current_user.colaborator.social_name}"%></p>
+<%end%>
+<%= link_to 'Sair', destroy_user_session_path, method: :delete %>
+</div>
+<%end%>
+
 <h2><%= "Aproximem-se mercadores! Tirem suas dúvidas diretamente com #{@ad.colaborator.social_name}"%> </h2>
 
 <h3><%= "#{@ad.name} - #{number_to_currency @ad.cost}"%></h3>
@@ -23,3 +32,6 @@
 <%= link_to 'Perguntar ao vendedor', new_ad_question_path(@ad) %>
 </div>
 <%end%>
+<div>
+<%= link_to 'Voltar', ad_path(@ad)%>
+</div>
