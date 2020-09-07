@@ -7,8 +7,7 @@
 </div>
 <%end%>
 
-<h2>Aqui pode-se negociar à vontade em particular! E quem sabe</h2>
-<h3>Selar o trato</h3>
+<h2>Aqui pode-se negociar à vontade em particular!</h2>
 
 <div>
 <% @negociations.each do |negociation| %>
@@ -36,5 +35,8 @@
 <dd><%= number_to_currency negociation.current_price %></dd>
 <%end%>
 </dl>
+<% if !@deal.nil? && current_user.colaborator.id == negociation.colaborator.id %>
+<h4><%= link_to "#{@ad.colaborator.social_name} gostaria de fechar um acordo com você", ad_negociation_deal_path(@ad, negociation, @deal) %>
+<%end%>
 <%end%>
 <%= link_to 'Voltar', ad_path(@ad) %>

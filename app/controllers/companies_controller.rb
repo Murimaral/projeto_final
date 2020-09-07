@@ -1,5 +1,5 @@
 class CompaniesController < ApplicationController
-    
+    before_action :authentic_admin?
     def index
         @companies = Company.all 
     end
@@ -25,5 +25,10 @@ class CompaniesController < ApplicationController
     private
     def company_params
         params.require(:company).permit(:name, :cnpj, :domain)
+    end
+    def authentic_admin?
+        if !current_user.admin?
+            redirect_to root_path, alert: 'Você não tem permissão de acesso'
+        end
     end
 end

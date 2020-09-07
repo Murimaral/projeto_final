@@ -1,0 +1,62 @@
+<% if user_signed_in? %>
+<div>
+<p><%= "Olá, #{current_user.colaborator.social_name}"%></p>
+</div>
+<%end%>
+
+
+<body>
+<h3>Estamos quase lá!</h3>
+<h4>Entre com os métodos de pagamentos e endereço de entrega</h4>
+
+<dl>
+<dt>Seus dados<dt>
+<dd><%= "#{@colaborator.social_name}"%></dd>
+<dd><%= "CPF: #{@colaborator.cpf}"%></dd>
+<dd><%= "Endereço: #{@colaborator.address}"%></dd>
+<dd><%= "Ocupa o cargo #{@colaborator.role} na empresa #{@colaborator.company.name}"%><dd>
+
+<dt>Dados do Vendedor<dt>
+<dd><%= "#{@ad.colaborator.social_name}"%></dd>
+<dd><%= "CPF: #{@ad.colaborator.cpf}"%></dd>
+<dd><%= "Endereço: #{@ad.colaborator.address}"%></dd>
+<dd><%= "Ocupa o cargo #{@ad.colaborator.role} na empresa #{@ad.colaborator.company.name}"%><dd>
+
+
+<dt>Produto</dt>
+<dd><%= "#{@ad.name}"%></dd>
+<dd><%= "Categoria: #{@ad.category}"%></dd>
+<% if @deal.final_price.blank? %>
+<dt><%="Valor de pagamento: #{number_to_currency @ad.cost}"%>
+<%else%>
+<dt><%= "Valor de pagamento: #{number_to_currency @deal.final_price}" %></dt>
+<%end%>
+<%= form_with model: [@ad, @negociation,@deal], local:true do |f| %>
+<p>
+<div class="field">
+
+<%= f.label :delivery_diff_ad, "Quanto ao local de entrega" %><br/>
+  <%= f.label :delivery_diff_ad, "Entregar para outro endereço", :value => 0  %>
+  <%= f.radio_button :delivery_diff_ad, 0 %>
+  <%= f.label :delivery_diff_ad, "Entregar para #{@colaborator.address}", :value => 1 %>
+  <%= f.radio_button :delivery_diff_ad, 1 %>
+</div>
+</p>
+<p>
+<div class="field">
+
+<%= f.label :pay_met, "Escolha a forma de pagamento" %><br/>
+  <%= f.label :pay_met, "Cartão de crédito", :value => 0  %>
+  <%= f.radio_button :pay_met, 0 %>
+  <%= f.label :pay_met, "Boleto", :value => 1 %>
+  <%= f.radio_button :pay_met, 1 %>
+</div>
+</p>
+<%= f.submit 'Selar o trato'%>
+<%end%>
+</dl>
+<div>
+<%= link_to 'Voltar', ad_negociation_deal_path(@ad, @negociation, @deal)%>
+</div>
+</body>
+

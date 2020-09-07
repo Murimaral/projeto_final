@@ -5,5 +5,5 @@ class Ad < ApplicationRecord
   has_one :deal
   validates :name, :category, :cost, presence: true
 
-  
+  enum status: {available:0, disab:1, sold:2}
 end

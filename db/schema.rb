@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_04_215341) do
+ActiveRecord::Schema.define(version: 2020_09_06_172515) do
 
   create_table "ads", force: :cascade do |t|
     t.string "name"
@@ -55,9 +55,9 @@ ActiveRecord::Schema.define(version: 2020_09_04_215341) do
     t.integer "status", default: 0
     t.decimal "final_price"
     t.integer "pay_met", default: 0
-    t.string "delivery_address"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "deliver_diff_ad", default: 0
     t.index ["ad_id"], name: "index_deals_on_ad_id"
     t.index ["colaborator_id"], name: "index_deals_on_colaborator_id"
   end

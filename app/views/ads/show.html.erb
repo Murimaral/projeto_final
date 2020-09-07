@@ -40,7 +40,7 @@
 <% if @negociations.empty? %>
 <%= link_to 'Quero comprar esse produto', new_ad_negociation_path(@ad)%>
 <%else %>
-<%= link_to 'Ver negociação', ad_negociations_path(@ad)%> 
+<%= link_to 'Ver negociação', onlyus_ad_negociation_path(@ad, @negociations.last)%> 
 <%end%>
 </div>  
 <!-- link_to 'Adicionar a minha lista de desejos-->

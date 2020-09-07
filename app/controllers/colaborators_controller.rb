@@ -20,6 +20,7 @@ class ColaboratorsController < ApplicationController
                                         :cpf, :address, :role).merge(user_id: current_user.id,
                                         company_id: @company)
    end
+   
    def id_of_company
       if  Company.find_by(domain: current_user.email.match(/@.*/).to_s).nil?
           redirect_to root_path, alert: 'Não há empresa cadastrada com esse domínio'

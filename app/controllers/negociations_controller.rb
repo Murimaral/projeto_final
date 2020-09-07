@@ -1,9 +1,11 @@
 class NegociationsController < ApplicationController
+before_action :authentic_colab?
 before_action :set_negociations_params
    
    def index
     @negociations = @ad.negociations
-   end
+    
+    end 
 
    def new
     @negociation = Negociation.new
@@ -33,15 +35,22 @@ before_action :set_negociations_params
     def onlyus
         @negociation = Negociation.find(params[:id])
         @negociations = @ad.negociations.where(colaborator: @negociation.colaborator)
+        if !Deal.find_by(colaborator: @negociation.colaborator).nil?
+            @deal = Deal.find_by(colaborator: @negociation.colaborator)
+        end
         render :index
     end
-
 
 
 private
 
    def set_negociations_params
     @ad = Ad.find(params[:ad_id])
+   end
+   def authentic_colab?
+         if current_user.visitor?
+             redirect_to root_path, alert: 'Você não tem permissão de acesso'
+         end
    end
 
 end 

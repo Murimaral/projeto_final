@@ -2,6 +2,7 @@ class DealsController < ApplicationController
    before_action :authorization_and_params
     
    def new
+    
     @deal = Deal.new
    end
    def create
@@ -12,6 +13,22 @@ class DealsController < ApplicationController
    def show
     @deal = Deal.find(params[:id])
    end
+   def edit
+    @deal = Deal.find(params[:id])
+   end
+   def update
+    @deal = Deal.find(params[:id])
+    if @deal.update(params.require(:deal).permit(:pay_met, :deliver_diff_ad))
+        redirect_to @ad, notice: 'Trato feito! Assim que for confirmado o pagamento, o envio será realizado'     
+        @ad.sold!
+    else
+        redirect_to root_path, notice: 'Houve um erro inesperado'
+    end   
+
+
+   end
+
+
 
 private
 

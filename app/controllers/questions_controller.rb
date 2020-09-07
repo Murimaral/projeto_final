@@ -1,6 +1,6 @@
 class QuestionsController < ApplicationController
 before_action :set_ad_params
-
+before_action :authentic_colab?
 
 def index
    @questions = Question.where(ad: @ad)
@@ -39,7 +39,11 @@ private
 def set_ad_params
     @ad = Ad.find(params[:ad_id])
 end
-
+def authentic_colab?
+    if current_user.visitor?
+        redirect_to root_path, alert: 'Você não tem permissão de acesso'
+    end
+end
 
 
 end 

@@ -32,6 +32,10 @@
 <dt><%= "Valor de oferta: #{number_to_currency @deal.final_price}" %></dt>
 <%end%>
 <div>
+<%if current_user.colaborator.id == @colaborator.id%>
+<%= link_to "Trato feito, vamos aos métodos de pagamento", edit_ad_negociation_deal_path(@ad, @negociation, @deal) %>
+<%end%>
+<%= link_to 'Cancelar', ad_negociation_deal_path(@ad, @negociation, @deal), method: :delete, data: {confirm: 'Deseja cancelar esse acordo?'} %>
 <%= link_to 'Voltar', ad_path(@ad)%>
 </div>
 </body>
