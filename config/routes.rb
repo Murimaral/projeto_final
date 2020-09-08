@@ -8,7 +8,12 @@ Rails.application.routes.draw do
     resources :questions
     resources :negociations do
       get 'onlyus', on: :member
-      resources :deals 
+      get 'arrange', to: 'negociations#arrange', method: :get do
+        get 'complete', to: 'negociations#complete', method: :post
+      end 
+      resources :deals do
+        resources :payments, only: [:show, :edit, :update]
+      end
     end 
    end
 end

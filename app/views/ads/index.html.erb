@@ -29,9 +29,6 @@
 <%if !ad.negociations.empty? %>
 <dt>Tem marujo querendo selar um trato com você! Clique para ver negociação: </dt>
 <% ad.negociations.each do |negociation| %>
-<% if negociation.answer.blank? %>
-<dd><%=link_to "Responder proposta de #{negociation.colaborator.social_name}", onlyus_ad_negociation_path(ad, negociation)%></dd>
-<%else%>
 <dd><%=link_to "Ver negociação com #{negociation.colaborator.social_name}", onlyus_ad_negociation_path(ad, negociation)%></dd>
 <%end%>
 <%end%>
@@ -43,7 +40,6 @@
 
 <% end %>
 
-<%end%>
 <%= link_to 'Meus anúncios', owned_ads_path %>
 <%= link_to 'Criar novo anúncio', new_ad_path %>
 <div>

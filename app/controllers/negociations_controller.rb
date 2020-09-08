@@ -1,21 +1,22 @@
 class NegociationsController < ApplicationController
+
 before_action :authentic_colab?
 before_action :set_negociations_params
    
-   def index
-    @negociations = @ad.negociations
+   #def index
+    #@negociations = @ad.negociations
     
-    end 
+    #end 
 
    def new
     @negociation = Negociation.new
    end
-
+  
    def create 
     @negociation = Negociation.new(params.require(:negociation).permit(:ask).merge(colaborator: current_user.colaborator, 
                                     ad: @ad))
     if @negociation.save
-        redirect_to @ad, notice: 'Proposta enviada'
+        redirect_to onlyus_ad_negociation_path(@ad,@negociation), notice: 'Mensagem enviada'
     else
         render :new, notice: 'Houve algum erro'
     end
@@ -25,10 +26,10 @@ before_action :set_negociations_params
    end
    def update
     @negociation = Negociation.find(params[:id])
-        if @negociation.update!(params.require(:negociation).permit(:answer, :current_price))
-            redirect_to @ad, notice: 'Contra-proposta enviada'
+        if @negociation.update!(params.require(:negociation).permit(:answer))
+            redirect_to onlyus_ad_negociation_path(@ad,@negociation), notice: 'Mensagem enviada'
         else
-            render :edit, notice: 'Houve algum erro'    
+           render :edit, notice: 'Houve algum erro'    
         end
     
     end
@@ -40,7 +41,18 @@ before_action :set_negociations_params
         end
         render :index
     end
+    #def arrange
+        #@negociation_col = Negociation.find(params[:negociation_id])
+        #@negociation = Negociation.new(ad: @ad, colaborator: @negociation_col.colaborator)
+        #render :new
 
+    #end
+    #def complete
+       # @negociation = Negociation.find(params[:id])
+        #if @negociation.create!(params.require(:negociation).permit(:ask, :colaborator, :ad))
+         #  redirect_to onlyus_ad_negociation_path(@ad, @negociation), notice: 'Mensagem enviada'
+        #end
+   # end
 
 private
 

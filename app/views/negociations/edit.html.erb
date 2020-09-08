@@ -6,7 +6,8 @@
 <%= link_to 'Sair', destroy_user_session_path, method: :delete %>
 </div>
 <%end%>
-<h3> Envie sua contra-proposta</h3>
+
+<h3> Envie sua proposta ao vendedor!</h3>
 
 <% if @negociation.errors.any? %>
 <% @negociation.errors.full_messages.each do |e| %>
@@ -16,15 +17,11 @@
 <%= form_with model: [@ad, @negociation], local: true do |f| %>
 <div>
 <dl>
-<dt><%= f.label :answer, 'Contra-proposta' %></dt>
+<dt><%= f.label :answer, 'Mensagem' %></dt>
 <dd><%= f.text_field :answer %></dd>
 </div>
 <div>
-<dt><%= f.label :current_price, 'Atualizar valor' %></dt>
-<dd><%= f.number_field :current_price %></dd>
-</div>
-<div>
-<%= f.submit 'Enviar contra-proposta' %>
+<%= f.submit 'Enviar' %>
 </div>
 <%end%>
 

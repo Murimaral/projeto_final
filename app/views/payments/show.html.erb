@@ -1,0 +1,45 @@
+<% if user_signed_in? %>
+<div>
+<p><%= "Olá, #{current_user.colaborator.social_name}"%></p>
+</div>
+<%end%>
+
+
+<body>
+<h3>Trato bom é trato feito!</h3>
+<h4>Compra realizada com sucesso</h4>
+
+<dl>
+<dt>Comprador<dt>
+<dd><%= "#{@payment.colaborator.social_name}"%></dd>
+<dd><%= "CPF: #{@payment.colaborator.cpf}"%></dd>
+<dd><%= "Endereço: #{@payment.colaborator.address}"%></dd>
+<dd><%= "Ocupa o cargo #{@payment.colaborator.role} na empresa #{@payment.colaborator.company.name}"%><dd>
+
+<dt>Vendedor<dt>
+<dd><%= "#{@payment.ad.colaborator.social_name}"%></dd>
+<dd><%= "CPF: #{@payment.ad.colaborator.cpf}"%></dd>
+<dd><%= "Endereço: #{@payment.ad.colaborator.address}"%></dd>
+<dd><%= "Ocupa o cargo #{@payment.ad.colaborator.role} na empresa #{@payment.ad.colaborator.company.name}"%><dd>
+
+
+<dt>Produto</dt>
+<dd><%= "#{@payment.ad.name}"%></dd>
+<% if @payment.delivery_address.blank? %>
+<dd><%= "Endereço de envio: #{@payment.colaborator.address}"%></dd>
+<%else%>
+<dd><%= "Endereço de envio: #{@payment.delivery_address}"%></dd>
+<%end%>
+<dt>Forma de pagamento:</dt>
+<% if @deal.billet? %>
+<dd>Boleto<dd>
+<%else%>
+<dd>Cartão de crédito</dd>
+<%end%>
+
+<dt><%="Valor de pagamento: #{number_to_currency @payment.price}"%>
+<div>
+
+<%= link_to 'Concluir e voltar para anúncios', ads_path%>
+</div>
+</body>

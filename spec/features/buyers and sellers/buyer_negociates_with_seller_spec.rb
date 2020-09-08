@@ -53,13 +53,13 @@ feature 'Buyer send a proposal to seller' do
         visit root_path
         click_on 'Velejar pelas ofertas'
         click_on 'Mais detalhes'
-        click_on 'Quero comprar esse produto'
-        fill_in 'Proposta', with: 'te dou 40 e nao se fala mais nisso'
-        click_on 'Enviar proposta'
+        click_on 'Quero negociar este produto'
+        fill_in 'Mensagem', with: 'te dou 40 e nao se fala mais nisso'
+        click_on 'Enviar'
 
-        expect(page).to have_content 'Proposta enviada'
+        expect(page).to have_content 'Mensagem enviada'
         expect(page).not_to have_content 'Quero comprar esse produto'
-        expect(page).to have_content 'Ver negociação'
+        expect(page).to have_content 'Enviar mensagem'
 
       end 
       
@@ -121,7 +121,7 @@ feature 'Buyer send a proposal to seller' do
         #assert
         expect(page).to have_content 'quanto sai essa brincadeira ai'
         expect(page).to have_content 'Colmeia'
-        expect(page).to have_content 'Aguardando resposta do vendedor'
+        expect(page).to have_content 'Enviar mensagem'
 
       end 
 
@@ -179,15 +179,16 @@ feature 'Buyer send a proposal to seller' do
         visit root_path
         click_on 'Velejar pelas ofertas'
 
-        click_on 'Responder proposta de Chuva'
+        click_on 'Ver negociação com Chuva'
         #byebug
-        click_on 'Fazer contra-proposta'
-        fill_in 'Contra-proposta', with: 'ta bom faço por 40'
-        fill_in 'Atualizar valor', with: 40
-        click_on 'Enviar contra-proposta'
+        click_on 'Enviar mensagem'
+        fill_in 'Mensagem', with: 'ta bom faço por 40'
+        click_on 'Enviar'
 
-        expect(page).to have_content 'Contra-proposta enviada'
-        expect(page).to have_content 'Ver negociação com Chuva'
+        expect(page).to have_content 'Mensagem enviada'
+        expect(page).to have_content 'ta bom faço por 40'
+        expect(page).to have_content 'quanto sai essa brincadeira ai'
+
 
       end 
       
@@ -253,7 +254,7 @@ feature 'Buyer send a proposal to seller' do
         visit root_path
         click_on 'Velejar pelas ofertas'
 
-        click_on 'Responder proposta de Chuva'
+        click_on 'Ver negociação com Chuva'
         
         expect(page).to have_content 'quanto sai essa brincadeira ai'
         expect(page).not_to have_content 'nao devo aparecer'

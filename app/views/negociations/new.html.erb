@@ -17,11 +17,11 @@
 <%= form_with model: [@ad, @negociation], local: true do |f| %>
 <div>
 <dl>
-<dt><%= f.label :ask, 'Proposta' %></dt>
+<dt><%= f.label :ask, 'Mensagem' %></dt>
 <dd><%= f.text_field :ask %></dd>
 </div>
 <div>
-<%= f.submit 'Enviar proposta' %>
+<%= f.submit 'Enviar' %>
 </div>
 <%end%>
 

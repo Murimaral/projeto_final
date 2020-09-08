@@ -13,27 +13,31 @@
 <% @negociations.each do |negociation| %>
 <dl>
 <div>
+
+<p>
 <dt><%= "#{negociation.colaborator.social_name}:"%></dt>
 <dd><%= "#{negociation.ask}"%></dd>
-</div>
-<div>
-<%if negociation.answer.blank? %>
-<p>Aguardando resposta do vendedor</p>
-<%if current_user.colaborator.id == @ad.colaborator.id %>
-<p><%= link_to 'Fazer contra-proposta', edit_ad_negociation_path(@ad, negociation)%></p>
-<p><%= link_to 'Oferta final de negociação', new_ad_negociation_deal_path(@ad, negociation) %>
-<%end%>
-<%else%>
+</p>
+<p>
+<% if !negociation.answer.blank? %>
 <dt><%= "#{@ad.colaborator.social_name}:"%></dt>
 <dd><%= "#{negociation.answer}"%></dd>
+<%end%>
 </div>
+<div>
+<%if current_user.colaborator.id == negociation.colaborator.id && @negociations.any?%>
+<%= link_to 'Enviar mensagem', new_ad_negociation_path(@ad, negociation) %>
 <%end%>
-<dt>Valor atual: </dt>
-<%if negociation.current_price.blank? %>
-<dd><%= number_to_currency @ad.cost%></dd>
+<%if current_user.colaborator.id == @ad.colaborator.id %>
+<p><%= link_to 'Enviar mensagem', edit_ad_negociation_path(@ad, negociation)%></p>
+<% if !@deal.nil? %>
+<p><%= link_to 'Ver oferta de negociação', ad_negociation_deal_path(@ad, negociation,@deal) %>
 <%else%>
-<dd><%= number_to_currency negociation.current_price %></dd>
+<p><%= link_to 'Oferta final de negociação', new_ad_negociation_deal_path(@ad, negociation) %>
 <%end%>
+<%end%>
+</div>
+
 </dl>
 <% if !@deal.nil? && current_user.colaborator.id == negociation.colaborator.id %>
 <h4><%= link_to "#{@ad.colaborator.social_name} gostaria de fechar um acordo com você", ad_negociation_deal_path(@ad, negociation, @deal) %>

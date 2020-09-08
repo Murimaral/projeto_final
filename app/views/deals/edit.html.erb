@@ -7,7 +7,7 @@
 
 <body>
 <h3>Estamos quase lá!</h3>
-<h4>Entre com os métodos de pagamentos e endereço de entrega</h4>
+<h4>Confirme a de pagamentos e o endereço de entrega</h4>
 
 <dl>
 <dt>Seus dados<dt>
@@ -35,24 +35,24 @@
 <p>
 <div class="field">
 
-<%= f.label :delivery_diff_ad, "Quanto ao local de entrega" %><br/>
-  <%= f.label :delivery_diff_ad, "Entregar para outro endereço", :value => 0  %>
-  <%= f.radio_button :delivery_diff_ad, 0 %>
-  <%= f.label :delivery_diff_ad, "Entregar para #{@colaborator.address}", :value => 1 %>
-  <%= f.radio_button :delivery_diff_ad, 1 %>
+<%= f.label :deliver_diff_ad, "Quanto ao local de entrega" %><br/>
+  <%= f.label :deliver_diff_ad, "Entregar para #{@colaborator.address}", :value => :same_address  %>
+  <%= f.radio_button :deliver_diff_ad, :same_address, checked:true %>
+  <%= f.label :deliver_diff_ad, "Entregar para outro endereço", :value => :another_address %>
+  <%= f.radio_button :deliver_diff_ad, :another_address %>
 </div>
 </p>
 <p>
 <div class="field">
 
 <%= f.label :pay_met, "Escolha a forma de pagamento" %><br/>
-  <%= f.label :pay_met, "Cartão de crédito", :value => 0  %>
-  <%= f.radio_button :pay_met, 0 %>
-  <%= f.label :pay_met, "Boleto", :value => 1 %>
-  <%= f.radio_button :pay_met, 1 %>
+  <%= f.label :pay_met, "Cartão de crédito", :value => :creditcard %>
+  <%= f.radio_button :pay_met, :creditcard, checked:true %>
+  <%= f.label :pay_met, "Boleto", :value => :billet %>
+  <%= f.radio_button :pay_met, :billet %>
 </div>
 </p>
-<%= f.submit 'Selar o trato'%>
+<%= f.submit 'Continuar'%>
 <%end%>
 </dl>
 <div>

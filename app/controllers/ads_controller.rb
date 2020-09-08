@@ -2,7 +2,7 @@ class AdsController < ApplicationController
     before_action :authentic_colab?
     before_action :set_colab, only: [:index, :create, :update]
    def index
-      @ads = Ad.where(colaborator: @company.colaborators)
+      @ads = Ad.where(colaborator: @company.colaborators, status: :available)
    end
    
    def new
