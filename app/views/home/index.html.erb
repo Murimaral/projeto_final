@@ -1,12 +1,9 @@
 
 <body style="background-color:lightgray;">
-<h1 color=navy>SealTheDeal</h1>  <<%= image_tag  "desenhofoca4.png" %>>
-<div>
-<% if user_signed_in? && current_user.visitor? %>
-<%= link_to 'Preencha aqui seus dados e navegue sem restrições!', new_colaborator_path %>
-<% end %>
-</div>
-<div>
+<table width="100%" border="3">
+<tr>
+<td colspan ="2" bgcolor="CornflowerBlue" >
+<div align="right" valign="top">
 <% if user_signed_in? %>
 <%if !current_user.colaborator.nil? %>
 <p><%= "Olá, #{current_user.colaborator.social_name}"%></p>
@@ -16,16 +13,26 @@
 <%= link_to 'Fazer login', new_user_session_path %>
 <% end %>
 </div>
-<div>
-<% if user_signed_in? && current_user.admin? %>
-<%= link_to 'Ver empresas parceiras', companies_path %>
-<% end %>
-</div>
-<div>
-<%if user_signed_in? && !current_user.visitor? %>
-<p><%=link_to 'Velejar pelas ofertas',ads_path %></p>
-<p><%=link_to 'Comunidade à bordo',  colaborators_path %></p>
-<%end%>
+<h1 color=snow>SealTheDeal</h1>
+</td></tr>
+<tr valign = "top">
+<td bgcolor="Linen" width="20%">
+<b>Menu</b><br/>
+<% if user_signed_in? && current_user.visitor? %>
 
-</div>
+<b><%= link_to 'Preencha aqui seus dados e navegue sem restrições!', new_colaborator_path %></b><br/>
+<% end %>
+<% if user_signed_in? && current_user.admin? %>
+<b><%= link_to 'Ver empresas parceiras', companies_path %></b><br/>
+<% end %>
+<%if user_signed_in? && !current_user.visitor? %>
+<b><%=link_to 'Velejar pelas ofertas',ads_path %></b><br/>
+<b><%=link_to 'Comunidade à bordo',  colaborators_path %></b><br/>
+<%end%>
+</td>
+<td bgcolor="snow" align="center">
+<%= image_tag  "desenhofoca4.png" %>
+</td>
+</tr>
+</table>
 </body>

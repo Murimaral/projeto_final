@@ -7,25 +7,25 @@
 </div>
 <%end%>
 
-<h3>Perfil</h3>
-<dl>
-<dt>Tripulante:</dt><br/>
-<dd><%="#{@colaborator.social_name}"%></dd> 
-<dt>Departamento:</dt><br/>
-<dd><%="#{@colaborator.section}"%></dd> 
-<dt>Cargo atual:</dt><br/>
-<dd><%="#{@colaborator.role}"%></dd> 
-<dt>Endereço:</dt><br/>
-<dd><%="#{@colaborator.address}"%></dd> 
-<dt>Data de nascimento:</dt><br/>
-<dd><%="#{l @colaborator.birth_date}"%></dd> 
-<dt>Contato:</dt>
-<dd><%="#{@colaborator.user.email}"%></dd>
-</dl>
+<table width= "100%" border="3">
+<tr>
+<td colspan="2" bgcolor="CornflowerBlue">
+<h3>Perfil</h3></td>
+</tr>
+<tr valign ="center">
+<td bgcolor = Linen >
+<b>Tripulante:<b><%="#{@colaborator.social_name}"%><br/>
+<b>Departamento:</b><%="#{@colaborator.section}"%><br/> 
+<b>Cargo atual:</b><%="#{@colaborator.role}"%><br/>
+<b>Endereço:</b><%="#{@colaborator.address}"%><br/>
+<b>Data de nascimento:</b><%="#{l @colaborator.birth_date}"%><br/>
+<b>Contato:</b><%="#{@colaborator.user.email}"%><br/>
+
+
 
 <% if @colaborator.id == current_user.colaborator.id %>
 <%= link_to 'Editar perfil', edit_colaborator_path(@colaborator)%>
-<%else%>
-<div><p><%=link_to 'Voltar', colaborators_path %></p></div>
 <%end%>
+<div><p><%=link_to 'Voltar', colaborators_path %></p></div>
+
 
