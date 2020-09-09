@@ -2,6 +2,7 @@
 <div>
 <%if current_user.colaborator.present? %>
 <p><%= "Olá, #{current_user.colaborator.social_name}"%></p>
+<p><%= link_to 'Meu perfil', colaborator_path(current_user.colaborator.id)%></p>
 <%end%>
 <%= link_to 'Sair', destroy_user_session_path, method: :delete %>
 </div>

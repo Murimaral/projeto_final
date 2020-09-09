@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_08_001203) do
+ActiveRecord::Schema.define(version: 2020_09_09_001056) do
 
   create_table "ads", force: :cascade do |t|
     t.string "name"
@@ -50,39 +50,25 @@ ActiveRecord::Schema.define(version: 2020_09_08_001203) do
   end
 
   create_table "deals", force: :cascade do |t|
-    t.integer "ad_id", null: false
     t.integer "colaborator_id", null: false
-    t.integer "status", default: 0
-    t.decimal "final_price"
-    t.integer "pay_met", default: 0
+    t.integer "ad_id", null: false
+    t.decimal "discount", default: "0.0"
+    t.decimal "freight", default: "0.0"
+    t.string "address"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "deliver_diff_ad", default: 0
     t.index ["ad_id"], name: "index_deals_on_ad_id"
     t.index ["colaborator_id"], name: "index_deals_on_colaborator_id"
   end
 
-  create_table "negociations", force: :cascade do |t|
-    t.integer "ad_id", null: false
-    t.integer "colaborator_id", null: false
-    t.string "ask"
-    t.string "answer"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["ad_id"], name: "index_negociations_on_ad_id"
-    t.index ["colaborator_id"], name: "index_negociations_on_colaborator_id"
-  end
-
   create_table "payments", force: :cascade do |t|
+    t.decimal "receipt"
     t.integer "colaborator_id", null: false
-    t.integer "ad_id", null: false
+    t.integer "deal_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "delivery_address"
-    t.decimal "price"
-    t.string "token"
-    t.index ["ad_id"], name: "index_payments_on_ad_id"
     t.index ["colaborator_id"], name: "index_payments_on_colaborator_id"
+    t.index ["deal_id"], name: "index_payments_on_deal_id"
   end
 
   create_table "questions", force: :cascade do |t|
@@ -112,9 +98,7 @@ ActiveRecord::Schema.define(version: 2020_09_08_001203) do
   add_foreign_key "colaborators", "users"
   add_foreign_key "deals", "ads"
   add_foreign_key "deals", "colaborators"
-  add_foreign_key "negociations", "ads"
-  add_foreign_key "negociations", "colaborators"
-  add_foreign_key "payments", "ads"
   add_foreign_key "payments", "colaborators"
+  add_foreign_key "payments", "deals"
   add_foreign_key "questions", "ads"
 end

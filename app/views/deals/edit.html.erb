@@ -7,14 +7,14 @@
 
 <body>
 <h3>Estamos quase lá!</h3>
-<h4>Confirme a de pagamentos e o endereço de entrega</h4>
+<h4>Entre com os valores de desconto e de frete</h4>
 
 <dl>
-<dt>Seus dados<dt>
-<dd><%= "#{@colaborator.social_name}"%></dd>
-<dd><%= "CPF: #{@colaborator.cpf}"%></dd>
-<dd><%= "Endereço: #{@colaborator.address}"%></dd>
-<dd><%= "Ocupa o cargo #{@colaborator.role} na empresa #{@colaborator.company.name}"%><dd>
+<dt>Dados do Comprador<dt>
+<dd><%= "#{@deal.colaborator.social_name}"%></dd>
+<dd><%= "CPF: #{@deal.colaborator.cpf}"%></dd>
+<dd><%= "Endereço: #{@deal.colaborator.address}"%></dd>
+<dd><%= "Ocupa o cargo #{@deal.colaborator.role} na empresa #{@deal.colaborator.company.name}"%><dd>
 
 <dt>Dados do Vendedor<dt>
 <dd><%= "#{@ad.colaborator.social_name}"%></dd>
@@ -26,37 +26,19 @@
 <dt>Produto</dt>
 <dd><%= "#{@ad.name}"%></dd>
 <dd><%= "Categoria: #{@ad.category}"%></dd>
-<% if @deal.final_price.blank? %>
-<dt><%="Valor de pagamento: #{number_to_currency @ad.cost}"%>
-<%else%>
-<dt><%= "Valor de pagamento: #{number_to_currency @deal.final_price}" %></dt>
-<%end%>
-<%= form_with model: [@ad, @negociation,@deal], local:true do |f| %>
-<p>
+<%= form_with model: [@ad,@deal], local:true do |f| %>
 <div class="field">
-
-<%= f.label :deliver_diff_ad, "Quanto ao local de entrega" %><br/>
-  <%= f.label :deliver_diff_ad, "Entregar para #{@colaborator.address}", :value => :same_address  %>
-  <%= f.radio_button :deliver_diff_ad, :same_address, checked:true %>
-  <%= f.label :deliver_diff_ad, "Entregar para outro endereço", :value => :another_address %>
-  <%= f.radio_button :deliver_diff_ad, :another_address %>
+<p><dt><%= f.label :discount, 'Desconto' %></dt>
+<dd><%=f.number_field :discount%></dd></p>
+<p><dt><%= f.label :freight, 'Valor de frete' %></dt>
+<dd><%=f.number_field :freight%></dd></p>
+<%= f.submit 'Enviar boleto'%>
 </div>
-</p>
-<p>
-<div class="field">
-
-<%= f.label :pay_met, "Escolha a forma de pagamento" %><br/>
-  <%= f.label :pay_met, "Cartão de crédito", :value => :creditcard %>
-  <%= f.radio_button :pay_met, :creditcard, checked:true %>
-  <%= f.label :pay_met, "Boleto", :value => :billet %>
-  <%= f.radio_button :pay_met, :billet %>
-</div>
-</p>
-<%= f.submit 'Continuar'%>
 <%end%>
 </dl>
 <div>
-<%= link_to 'Voltar', ad_negociation_deal_path(@ad, @negociation, @deal)%>
+<%= link_to 'Cancelar acordo', ad_deal_path(@ad, @deal), method: :delete, data: {confirm: 'Deseja recusar o acordo?'}%>
+<%= link_to 'Voltar', ad_path(@ad)%>
 </div>
 </body>
 

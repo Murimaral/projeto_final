@@ -1,19 +1,21 @@
 class PaymentsController < ApplicationController
    before_action :authentic_colab?
    before_action :set_params
+    def create
+        @payment = Payment.new(colaborator: @colaborator,deal: @deal,
+                                                receipt: @deal.calculate_receipt(@ad.cost))
+        if @payment.save!
+            redirect_to ad_deal_payment_path(@ad,@deal,@payment), notice: 'aaand Seal the deal! Compra realizada com sucesso!'
+            @ad.sold!
+        else
+            redirect_to ad_deal_path(@ad,@deal), notice: 'Houve algum erro inesperado'
+        end
+    end
+
     def show
         @payment = Payment.find(params[:id])
     end
-    def edit
-        @payment = Payment.find(params[:id])
-    end
-    def update
-        @payment = Payment.find(params[:id])
-        if @payment.update!(params.require(:payment).permit(:delivery_address))
-            redirect_to ad_negociation_deal_payment_path(@ad, @negociation, @deal,@payment), notice:  'Trato feito! Assim que for confirmado o pagamento, o envio será realizado'
-        end
-
-    end
+   
 
     private
     def authentic_colab?
@@ -27,11 +29,10 @@ class PaymentsController < ApplicationController
                 redirect_to root_path, notice: 'Houve algum erro'
             
         else
-                @ad = Ad.find(params[:ad_id])
-                @negociation = Negociation.find(params[:negociation_id])
-                @colaborator = @negociation.colaborator
-                @deal = Deal.find(params[:id])
-             
+            @deal = Deal.find(params[:deal_id])    
+            @ad = Ad.find(params[:ad_id])
+            @colaborator = @deal.colaborator
+                
         end
     end
         

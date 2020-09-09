@@ -2,6 +2,7 @@
 <div>
 <%if current_user.colaborator.present? %>
 <p><%= "Olá, #{current_user.colaborator.social_name}"%></p>
+<p><%= link_to 'Meu perfil', colaborator_path(current_user.colaborator.id)%></p>
 <%end%>
 <%= link_to 'Sair', destroy_user_session_path, method: :delete %>
 </div>
@@ -20,29 +21,25 @@
 </dl>
 </div>
 <% if current_user.id == @ad.colaborator.user.id %>
-<div>
-<%if !@ad.negociations.empty? %>
-<dt>Tem marujo querendo selar um trato com você! Clique para ver negociação: </dt>
-<% @ad.negociations.each do |negociation| %>
-<% if negociation.answer.blank? %>
-<dd><%=link_to "Ver negociação com #{negociation.colaborator.social_name}", onlyus_ad_negociation_path(@ad, negociation)%></dd>
-<%end%>
-<%end%>
-<%end%>
-</div>
+
 <%= link_to 'Editar anúncio', edit_ad_path(@ad)%>
 <%= link_to 'Apagar anúncio', ad_path(@ad), method: :delete, data: {
     confirm: 'Gostaria de apagar este anúncio?'} %>
-<% else %>
-<div>
-<% if @negociations.empty? %>
-<%= link_to 'Quero negociar este produto', new_ad_negociation_path(@ad)%>
-<%else %>
-<%= link_to 'Ver negociação', onlyus_ad_negociation_path(@ad, @negociations.last)%> 
+<% if !@deals.empty? %>
+<%@deals.each do |deal|%>
+<p><%=link_to "Solicitação de #{deal.colaborator.social_name}", edit_ad_deal_path(@ad, deal)%></p>
+<%end%>>
 <%end%>
-</div>  
-<!-- link_to 'Adicionar a minha lista de desejos-->
-<% end %>
+<% else %>
+
+<% if @deal.nil? %>
+<%=link_to 'Quero comprar esse produto', new_ad_deal_path(@ad)%>
+<%elsif !@deal.freight.blank? || !@deal.discount.blank?%>
+<%=link_to 'Proposta de acordo', ad_deal_path(@ad, @deal) %>
+<%end%>
+<%end%>
+  
+
 
 <div>
 <%= link_to 'Perguntas sobre o produto', ad_questions_path(@ad) %>    

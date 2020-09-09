@@ -1,7 +1,6 @@
 class Ad < ApplicationRecord
   belongs_to :colaborator
   has_many :questions, dependent: :destroy
-  has_many :negociations, dependent: :destroy
   has_one :deal, dependent: :destroy
   validates :name, :category, :cost, presence: true
 

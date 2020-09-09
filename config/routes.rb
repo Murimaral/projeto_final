@@ -2,20 +2,21 @@ Rails.application.routes.draw do
   devise_for :users
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
    root to: 'home#index'
-   resources :companies, :colaborators
+   resources :companies 
+   resources :colaborators do
+    get 'search', on: :collection
+   end
    resources :ads do
     get 'owned',on: :collection
+    get 'disab', on: :member
+    get 'enab', on: :member
     resources :questions
-    resources :negociations do
-      get 'onlyus', on: :member
-      get 'arrange', to: 'negociations#arrange', method: :get do
-        get 'complete', to: 'negociations#complete', method: :post
-      end 
-      resources :deals do
-        resources :payments, only: [:show, :edit, :update]
+    get 'search', on: :collection
+    resources :deals do
+        post 'paycheck', to: 'payment#create'
+        resources :payments, only: [:new, :create, :show]
       end
     end 
-   end
 end
 
 

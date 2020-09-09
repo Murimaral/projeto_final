@@ -6,15 +6,14 @@
 
 
 <body>
-<h3>Oferta de fechamento de negócio</h3>
-<h4>Dados da compra</h4>
+<h3>Dados do Acordo</h3>
 
 <dl>
 <dt>Comprador<dt>
-<dd><%= "#{@colaborator.social_name}"%></dd>
-<dd><%= "CPF: #{@colaborator.cpf}"%></dd>
-<dd><%= "Endereço: #{@colaborator.address}"%></dd>
-<dd><%= "Ocupa o cargo #{@colaborator.role} na empresa #{@colaborator.company.name}"%><dd>
+<dd><%= "#{@deal.colaborator.social_name}"%></dd>
+<dd><%= "CPF: #{@deal.colaborator.cpf}"%></dd>
+<dd><%= "Endereço: #{@deal.colaborator.address}"%></dd>
+<dd><%= "Ocupa o cargo #{@deal.colaborator.role} na empresa #{@deal.colaborator.company.name}"%><dd>
 
 <dt>Vendedor<dt>
 <dd><%= "#{@ad.colaborator.social_name}"%></dd>
@@ -26,15 +25,13 @@
 <dt>Produto</dt>
 <dd><%= "#{@ad.name}"%></dd>
 <dd><%= "Categoria: #{@ad.category}"%></dd>
-<% if !@deal.final_price.blank? %>
-<dt><%= "Valor de oferta: #{number_to_currency @deal.final_price}" %></dt>
-<%end%>
+<dt><%= "Valor de oferta: #{number_to_currency @deal.calculate_receipt(@ad.cost)}" %></dt>
 <div>
-<%if current_user.colaborator.id == @colaborator.id%>
-<%= link_to "Aceitar e continuar", edit_ad_negociation_deal_path(@ad, @negociation, @deal) %>
+<%if current_user.colaborator.id == @deal.colaborator.id%>
+<%= link_to "Aceitar e continuar para o pagamento", ad_deal_payments_path(@ad,@deal), method: :post %>
 <%end%>
-<%= link_to 'Cancelar', ad_negociation_deal_path(@ad, @negociation, @deal), method: :delete, data: {confirm: 'Deseja cancelar esse acordo?'} %>
-<%= link_to 'Voltar', onlyus_ad_negociation_path(@ad, @negociation, @deal)%>
+<%= link_to 'Recusar', ad_deal_path(@ad, @deal), method: :delete, data: {confirm: 'Deseja recusar esse acordo?'} %>
+<%= link_to 'Voltar', ad_path(@ad)%>
 </div>
 </body>
 

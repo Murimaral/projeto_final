@@ -1,0 +1,47 @@
+<% if user_signed_in? %>
+<div>
+<p><%= "Olá, #{current_user.colaborator.social_name}"%></p>
+<p><%= link_to 'Meu perfil', colaborator_path(current_user.colaborator.id)%></p>
+</div>
+<%end%>
+
+
+<h1>Comunidade SealTheDeal</h1>
+<div>
+<p>Pesquisar na tripulação</p>
+<p><%= form_with url: search_colaborators_path, method: :get, local: true do |f| %>
+    <%= f.label :q, 'Nome' %>
+    <%= f.text_field :q %>
+    <%= f.submit 'Buscar por nome' %></p>
+    <%end%>
+    <p><%= form_with url: search_colaborators_path, method: :get, local: true do |f| %>
+    <%= f.label :p, 'Departamento' %>
+    <%= f.text_field :p %>
+    <%= f.submit 'Buscar por departamento' %></p>
+    <%end%>
+    <p><%= form_with url: search_colaborators_path, method: :get, local: true do |f| %>
+    <%= f.label :o, 'Cargo' %>
+    <%= f.text_field :o %>
+    <%= f.submit 'Buscar por cargo' %></p>
+    <%end%>
+    </div>
+
+<%if @colaborators.nil?%>
+<h3>Nao foram encontrados colaboradores</h3>
+<%else%>
+<dl>
+<%@colaborators.each do |colaborator|%>
+<dt>Tripulante:</dt><br/>
+<dd><%="#{colaborator.social_name}"%></dd> 
+<dt>Departamento:</dt><br/>
+<dd><%="#{colaborator.section}"%></dd> 
+<dt>Cargo atual:</dt><br/>
+<dd><%="#{colaborator.role}"%></dd> 
+<dt><%=link_to 'Ver perfil', colaborator_path(colaborator) %>
+</dl>
+
+<%end%>
+
+
+<%end%>
+<%=link_to 'Voltar', root_path%>

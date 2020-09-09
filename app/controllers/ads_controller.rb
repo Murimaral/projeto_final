@@ -1,8 +1,9 @@
 class AdsController < ApplicationController
     before_action :authentic_colab?
-    before_action :set_colab, only: [:index, :create, :update]
+    before_action :set_colab, only: [:index, :create, :update, :show]
    def index
       @ads = Ad.where(colaborator: @company.colaborators, status: :available)
+      
    end
    
    def new
@@ -20,27 +21,39 @@ class AdsController < ApplicationController
 
    def show
       @ad = Ad.find(params[:id])
-      @negociations = @ad.negociations.where(colaborator: current_user.colaborator)
+      @deals = Deal.where(ad: @ad)
+      anydeals
    end
 
    def edit
       @ad = Ad.find(params[:id])
-   end
+      if current_user.colaborator.id != @ad.colaborator.id 
+         return redirect_to root_path, notice: 'Você não tem permissão para essa ação'
+      end
+   end 
 
    def update
-      @ad = Ad.new(params.require(:ad).permit(:name, :category, 
+      @ad = Ad.update(params.require(:ad).permit(:name, :category, 
                      :description, :cost).merge(colaborator: @colaborator))
-      if @ad.save
-         redirect_to @ad, notice: 'Alterações salvas com sucesso!'
-      else
-         render :edit                  
+      if current_user.colaborator.id != @ad.colaborator.id   
+         return redirect_to root_path, notice: 'Você não tem permissão para essa ação'
+      else             
+         if @ad.save
+            redirect_to @ad, notice: 'Alterações salvas com sucesso!'
+         else
+            render :edit                  
+         end
       end
    end
 
    def destroy
       @ad = Ad.find(params[:id])
-      @ad.destroy
-      redirect_to ads_path, notice: 'Anúncio apagado com sucesso!'
+      if current_user.colaborator.id == @ad.colaborator.id 
+         @ad.destroy
+         redirect_to ads_path, notice: 'Anúncio apagado com sucesso!'
+      else
+         redirect_to root_path, notice: 'Você não tem permissão para essa ação'
+      end 
    end 
    
    def owned
@@ -48,7 +61,24 @@ class AdsController < ApplicationController
       @ads = Ad.where(colaborator: @colaborator)
       render :index
    end
-
+   def disab
+      @ad = Ad.find(params[:id])
+      if current_user.colaborator.id == @ad.colaborator.id 
+         @ad.disab!
+         redirect_to ads_path, notice: 'Anúncio desabilitado, para desfazer, acesse Meus anúncios e selecione a opção Habilitar anúncio'
+      else
+         redirect_to root_path, notice: 'Você não tem permissão para essa ação'
+      end
+   end
+   def enab
+      @ad = Ad.find(params[:id])
+      if current_user.colaborator.id == @ad.colaborator.id 
+         @ad.available!
+         redirect_to ads_path, notice: 'Anúncio habilitado'
+      else
+         redirect_to root_path, notice: 'Você não tem permissão para essa ação'
+      end
+   end
 
 private
 def ad_params
@@ -65,6 +95,10 @@ def set_colab
    @company = current_user.colaborator.company
    @colaborator = current_user.colaborator
 end
-            
+def anydeals
+   if !Deal.find_by(ad: @ad, colaborator: @colaborator).nil?   
+      @deal = Deal.find_by(ad: @ad, colaborator: @colaborator)  
+   end
+end     
 
 end

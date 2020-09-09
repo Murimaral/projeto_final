@@ -38,6 +38,9 @@ end
 private
 def set_ad_params
     @ad = Ad.find(params[:ad_id])
+    if !@ad.available
+        redirect_to ads_path, notice: 'Esse anúncio não está disponível'
+    end
 end
 def authentic_colab?
     if current_user.visitor?

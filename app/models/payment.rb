@@ -1,12 +1,6 @@
 class Payment < ApplicationRecord
-  belongs_to :colaborator
-  belongs_to :ad
-  before_create :generate_token
+    belongs_to :deal
+    belongs_to :colaborator
 
+  end
   
-private 
-def generate_token
-  self.token = SecureRandom.alphanumeric(6).upcase 
-end
-
-end
