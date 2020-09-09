@@ -17,6 +17,12 @@
 <% @ads.each do |ad| %>
 <div>
 <h3><%= ad.name %></h3>
+<%if ad.photo.attached? %>
+<p>
+<strong>Foto do produto</strong>
+<%= image_tag ad.photo%>
+</p>
+<%end%>
 <dl>
 <dt>Categoria:</dt>
 <dd><%=ad.category%></dd>

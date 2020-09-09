@@ -3,6 +3,6 @@ class Ad < ApplicationRecord
   has_many :questions, dependent: :destroy
   has_one :deal, dependent: :destroy
   validates :name, :category, :cost, presence: true
-
+  has_one_attached :photo
   enum status: {available:0, disab:1, sold:2}
 end

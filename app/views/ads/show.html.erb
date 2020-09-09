@@ -11,6 +11,14 @@
 
 <div>
 <h3><%= @ad.name %></h3>
+<%if @ad.photo.attached? %>
+
+<strong>Foto do produto</strong>
+<p><%= image_tag(@ad.photo, size:'300')%>
+</p>
+<%else%>
+<p><%= image_tag("seal_deal.jpg", size:'200') %></p>
+<%end%>
 <dl>
 <dt>Categoria:</dt>
 <dd><%=@ad.category%></dd>

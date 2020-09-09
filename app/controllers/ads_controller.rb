@@ -1,6 +1,9 @@
 class AdsController < ApplicationController
     before_action :authentic_colab?
     before_action :set_colab, only: [:index, :create, :update, :show]
+   
+    
+    
    def index
       @ads = Ad.where(colaborator: @company.colaborators, status: :available)
       
@@ -33,12 +36,11 @@ class AdsController < ApplicationController
    end 
 
    def update
-      @ad = Ad.update(params.require(:ad).permit(:name, :category, 
-                     :description, :cost).merge(colaborator: @colaborator))
+      @ad = Ad.find(params[:id])
       if current_user.colaborator.id != @ad.colaborator.id   
          return redirect_to root_path, notice: 'Você não tem permissão para essa ação'
       else             
-         if @ad.save
+         if @ad.update!(ad_params)
             redirect_to @ad, notice: 'Alterações salvas com sucesso!'
          else
             render :edit                  
@@ -83,7 +85,7 @@ class AdsController < ApplicationController
 private
 def ad_params
     params.require(:ad).permit(:name, :category,
-    :description, :cost).merge(colaborator_id: @colaborator.id)
+    :description, :cost, :photo).merge(colaborator_id: @colaborator.id)
 
 end
 def authentic_colab?
