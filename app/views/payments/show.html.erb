@@ -1,33 +1,48 @@
+<table width="100%" border="3">
+<tr>
+<td colspan ="3" bgcolor="CornflowerBlue" >
+<div align="right" valign="top">
 <% if user_signed_in? %>
-<div>
+<%if !current_user.colaborator.nil? %>
 <p><%= "Olá, #{current_user.colaborator.social_name}"%></p>
-</div>
 <%end%>
-
-
-<body>
-<h3>Trato bom é trato feito!</h3>
-
-<dl>
-<dt>Comprador<dt>
-<dd><%= "#{@payment.colaborator.social_name}"%></dd>
-<dd><%= "CPF: #{@payment.colaborator.cpf}"%></dd>
-<dd><%= "Endereço: #{@payment.colaborator.address}"%></dd>
-<dd><%= "Ocupa o cargo #{@payment.colaborator.role} na empresa #{@payment.colaborator.company.name}"%><dd>
-
-<dt>Vendedor<dt>
-<dd><%= "#{@payment.deal.colaborator.social_name}"%></dd>
-<dd><%= "CPF: #{@payment.deal.colaborator.cpf}"%></dd>
-<dd><%= "Endereço: #{@payment.deal.colaborator.address}"%></dd>
-<dd><%= "Ocupa o cargo #{@payment.deal.colaborator.role} na empresa #{@payment.deal.colaborator.company.name}"%><dd>
-
-
-<dt>Produto</dt>
-<dd><%= "#{@payment.deal.ad.name}"%></dd>
-<dd><%= "Endereço de envio: #{@payment.deal.address}"%></dd>
-<dt><%="Valor de pagamento: #{number_to_currency @payment.deal.calculate_receipt(@ad.cost)}"%>
-<div>
-
-<%= link_to 'Finalizar e voltar para anúncios', ads_path%>
+<%= link_to 'Sair', destroy_user_session_path, method: :delete %>
+<% else %>
+<%= link_to 'Fazer login', new_user_session_path %>
+<% end %>
 </div>
-</body>
+<h1 color=snow align="center">SealTheDeal</h1>
+</td></tr>
+<tr><td bgcolor="mintcream" align="center" width="35%">
+<%= image_tag  "seal_deal.jpg" %>
+</td><td >
+<h3 align="center">Trato bom é trato feito!</h3>
+
+
+<p><b>Comprador<b><br/>
+<b><%= "#{@payment.colaborator.social_name}"%></b><br/>
+<b><%= "CPF: #{@payment.colaborator.cpf}"%></b><br/>
+<b><%= "Endereço: #{@payment.colaborator.address}"%></b><br/>
+<b><%= "Ocupa o cargo #{@payment.colaborator.role} na empresa #{@payment.colaborator.company.name}"%><b></p>
+
+<p><b>Vendedor<b><br/>
+<b><%= "#{@payment.deal.colaborator.social_name}"%></b><br/>
+<b><%= "CPF: #{@payment.deal.colaborator.cpf}"%></b><br/>
+<b><%= "Endereço: #{@payment.deal.colaborator.address}"%></b><br/>
+<b><%= "Ocupa o cargo #{@payment.deal.colaborator.role} na empresa #{@payment.deal.colaborator.company.name}"%><b></p>
+
+
+<p><b>Produto</b><br/>
+<b><%= "#{@payment.deal.ad.name}"%></b><br/>
+<b><%= "Endereço de envio: #{@payment.deal.address}"%></b><br/>
+<b><%="Valor de pagamento: #{number_to_currency @payment.deal.calculate_receipt(@ad.cost)}"%></b><br/></p>
+<div align="center">
+
+<b><%= link_to 'Finalizar e voltar para anúncios', ads_path%></b><br/>
+</div>
+</td>
+<td bgcolor="mintcream" align="center" width="35%">
+<%= image_tag  "seal_deal.jpg" %>
+</td>
+</table>
+

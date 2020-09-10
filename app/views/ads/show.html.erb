@@ -19,40 +19,35 @@
 <%else%>
 <p><%= image_tag("seal_deal.jpg", size:'200') %></p>
 <%end%>
-<dl>
-<dt>Categoria:</dt>
-<dd><%=@ad.category%></dd>
-<dt>Informações:</dt>
-<dd><%=@ad.description%></dd>
-<dt>Valor:</dt>
-<dd><%=number_to_currency @ad.cost %></dd>
-</dl>
-</div>
-<% if current_user.id == @ad.colaborator.user.id %>
+<table>
+<tr><td><b>Categoria:</b> <%=@ad.category%><br/>
+<b>Informações:</b> <%=@ad.description%><br/>
+<b>Valor:</b> <%=number_to_currency @ad.cost %><br/></td></tr>
 
-<%= link_to 'Editar anúncio', edit_ad_path(@ad)%>
-<%= link_to 'Apagar anúncio', ad_path(@ad), method: :delete, data: {
-    confirm: 'Gostaria de apagar este anúncio?'} %>
+<% if current_user.id == @ad.colaborator.user.id %>
+<b><%= link_to 'Editar anúncio', edit_ad_path(@ad)%></b><br/>
+<b><%= link_to 'Apagar anúncio', ad_path(@ad), method: :delete, data: {
+    confirm: 'Gostaria de apagar este anúncio?'} %></b><br/>
 <% if !@deals.empty? %>
 <%@deals.each do |deal|%>
-<p><%=link_to "Solicitação de #{deal.colaborator.social_name}", edit_ad_deal_path(@ad, deal)%></p>
-<%end%>>
+<b><%=link_to "Solicitação de #{deal.colaborator.social_name}", edit_ad_deal_path(@ad, deal)%></b><br/>
+<%end%>
 <%end%>
 <% else %>
 
 <% if @deal.nil? %>
-<%=link_to 'Quero comprar esse produto', new_ad_deal_path(@ad)%>
+<b><%=link_to 'Quero comprar esse produto', new_ad_deal_path(@ad)%></b><br/>
 <%elsif !@deal.freight.blank? || !@deal.discount.blank?%>
-<%=link_to 'Proposta de acordo', ad_deal_path(@ad, @deal) %>
+<b><%=link_to 'Proposta de acordo', ad_deal_path(@ad, @deal) %></b><br/>
 <%end%>
 <%end%>
   
 
 
 <div>
-<%= link_to 'Perguntas sobre o produto', ad_questions_path(@ad) %>    
+<b><%= link_to 'Perguntas sobre o produto', ad_questions_path(@ad) %></b><br/>
 </div>
 <div>
-<%= link_to 'Continuar navegando', ads_path %>
+<b><%= link_to 'Continuar navegando', ads_path %></b><br/>
 </div>
 

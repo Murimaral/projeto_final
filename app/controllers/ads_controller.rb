@@ -23,6 +23,7 @@ class AdsController < ApplicationController
    end
 
    def show
+
       @ad = Ad.find(params[:id])
       @deals = Deal.where(ad: @ad)
       anydeals

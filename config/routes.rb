@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     get 'search', on: :collection
    end
    resources :ads do
+    resources :albums, only: [:new, :edit, :show, :destroy, :update, :create]
     get 'owned',on: :collection
     get 'disab', on: :member
     get 'enab', on: :member
