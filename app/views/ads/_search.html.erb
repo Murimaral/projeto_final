@@ -1,0 +1,34 @@
+<div>
+<b><p>Buscar produtos</p></b>
+<p><%= form_with url: filterads_ads_path, method: :get, local: true do |f| %>
+    <%= f.label :q, 'Insira o título do anúncio' %>
+    <%= f.text_field :q %>
+    <%= f.submit 'Buscar por título' %></p>
+    <%end%>
+<div border="2">
+<%= form_with url: filterads_ads_path, method: :get, local:true do |f| %>
+ <%= f.label :p, 'Escolha uma categoria' %><br/>
+<%= f.radio_button :p, :fashion_acc  %>
+<%= f.label :p_fashion_acc, 'Moda e acessórios' %><br/>
+<%= f.radio_button :p, :cosmetic  %>
+<%= f.label :p_cosmetic, 'Cosméticos' %><br/>
+<%= f.radio_button :p, :eletrical_app  %>
+<%= f.label :p_eletrical_app, 'Eletrodomésticos' %><br/>
+<%= f.radio_button :p, :home_deco %>
+<%= f.label :p_home_deco,  'Casa e decoração'  %><br/>
+<%= f.radio_button :p, :tel_cel %>
+<%= f.label :p_tel_cel, 'Telefones e celulares'  %><br/>
+<%= f.radio_button :p, :book  %>
+<%= f.label :p_book, 'Livros, artigos, revistas' %><br/>
+<%= f.radio_button :p, :sport %>
+<%= f.label :p_sport, 'Lazer e esportes'  %><br/>
+<%= f.radio_button :p, :technology  %>
+<%= f.label :p_technology,'Tecnologia' %><br/>
+<%= f.radio_button :p, :other %>
+<%= f.label :p_other, 'Outros'  %><br/>
+<%=f.submit 'Filtrar por categoria'%><br/>
+<%end%>
+</div>
+    
+<p><%= button_to "Busca por preços baixos", {:controller => :ads, :action => 'lowprice'}, :method => :get %></p>
+    </div>

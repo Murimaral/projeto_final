@@ -1,6 +1,6 @@
 class AdsController < ApplicationController
     before_action :authentic_colab?
-    before_action :set_colab, only: [:index, :create, :update, :show]
+    before_action :set_colab, only: [:index, :create, :update, :show, :lowprice, :filterads]
    
     
     
@@ -23,8 +23,9 @@ class AdsController < ApplicationController
    end
 
    def show
-
+      
       @ad = Ad.find(params[:id])
+      @cat = Ad.categories[@ad.category]
       @deals = Deal.where(ad: @ad)
       anydeals
    end
@@ -82,6 +83,26 @@ class AdsController < ApplicationController
          redirect_to root_path, notice: 'Você não tem permissão para essa ação'
       end
    end
+
+   def filterads
+    
+      if params[:q].present? 
+         @ads = Ad.where(colaborator: @company.colaborators, status: :available).where('name LIKE ?', "%#{params[:q]}%")
+      elsif params[:p].present? 
+         @ads = Ad.where(colaborator: @company.colaborators, status: :available).where(category: params[:p])
+      else
+         return redirect_to ads_path, notice: 'Para realizar uma pesquisa, insira um valor válido'
+      end
+      render :index
+   end
+
+   def lowprice
+      @ads = Ad.where(colaborator: @company.colaborators, status: :available).order(cost: :asc)
+      render :index
+   end
+
+
+
 
 private
 def ad_params

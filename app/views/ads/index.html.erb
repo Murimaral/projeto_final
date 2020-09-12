@@ -7,7 +7,7 @@
 <%= link_to 'Sair', destroy_user_session_path, method: :delete %>
 </div>
 <%end%>
-
+<%= render partial: 'search'%>
 
 <%if @ads.empty? %>
 <h1>Não há anúncios</h1> 
@@ -25,7 +25,7 @@
 <%end%>
 <dl>
 <dt>Categoria:</dt>
-<dd><%=ad.category%></dd>
+<dd><%=ad.cat_prod(Ad.categories[ad.category])%></dd>
 <dt>Informações:</dt>
 <dd><%=ad.description%></dd>
 <dt>Valor:</dt>

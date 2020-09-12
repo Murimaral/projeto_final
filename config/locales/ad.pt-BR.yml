@@ -13,3 +13,15 @@ pt-BR:
         cost: "Preço"
         colaborator_id: "Colaborador"
         colaborator: "Colaborador"
+    enums:
+        ad:  
+         category:
+            fashion_acc: "Moda e acessórios"
+            cosmetic: "Cosméticos"
+            eletrical_app: "Eletrodomésticos"
+            home_deco: "Casa e decoração"
+            tel_cel: "Telefones e celulares"
+            book: "Livros, artigos, revistas"
+            sport: "Lazer e esportes"
+            technology: "Tecnologia"
+            other: "Outros"

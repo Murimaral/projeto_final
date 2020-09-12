@@ -23,8 +23,25 @@
 <%= f.text_field :name %>
 </div>
 <div>
-<%= f.label :category, 'Categoria' %>
-<%= f.text_field :category %>
+<%= f.label :category, 'Escolha uma categoria' %>
+<%= f.radio_button :category, :fashion_acc  %>
+<%= f.label :category_fashion_acc, 'Moda e acessórios' %>
+<%= f.radio_button :category, :cosmetic  %>
+<%= f.label :category_cosmetic, 'Cosméticos' %>
+<%= f.radio_button :category, :eletrical_app  %>
+<%= f.label :category_eletrical_app, 'Eletrodomésticos' %>
+<%= f.radio_button :category, :home_deco %>
+<%= f.label :category_home_deco,  'Casa e decoração'  %>
+<%= f.radio_button :category, :tel_cel %>
+<%= f.label :category_tel_cel, 'Telefones e celulares'  %>
+<%= f.radio_button :category, :book  %>
+<%= f.label :category_book, 'Livros, artigos, revistas' %>
+<%= f.radio_button :category, :sport %>
+<%= f.label :category_sport, 'Lazer e esportes'  %>
+<%= f.radio_button :category, :technology  %>
+<%= f.label :category_technology,'Tecnologia' %>
+<%= f.radio_button :category, :other %>
+<%= f.label :category_other, 'Outros'  %>
 </div>
 <div>
 <%= f.label :description, 'Informações do produto' %>

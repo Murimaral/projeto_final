@@ -11,6 +11,8 @@ Rails.application.routes.draw do
     get 'owned',on: :collection
     get 'disab', on: :member
     get 'enab', on: :member
+    get 'filterads', on: :collection
+    get 'lowprice', on: :collection
     resources :questions
     get 'search', on: :collection
     resources :deals do

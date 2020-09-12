@@ -20,7 +20,7 @@
 <p><%= image_tag("seal_deal.jpg", size:'200') %></p>
 <%end%>
 <table>
-<tr><td><b>Categoria:</b> <%=@ad.category%><br/>
+<tr><td><b>Categoria:</b> <%=@ad.cat_prod(@cat)%><br/>
 <b>Informações:</b> <%=@ad.description%><br/>
 <b>Valor:</b> <%=number_to_currency @ad.cost %><br/></td></tr>
 

@@ -29,7 +29,7 @@ feature 'Registered user creates an ad' do
         click_on 'Velejar pelas ofertas'
         click_on 'Criar novo anúncio'
         fill_in 'Nome do produto',with: 'Escrivaninha'
-        fill_in 'Categoria',with: 'escritório'
+        choose 'Casa e decoração'
         fill_in 'Informações do produto',with: 'Escrivaninha velha porem boa, aceito pagamento em VR'    
         fill_in 'Preço', with: 200.00
         click_on 'Anunciar'
@@ -37,7 +37,7 @@ feature 'Registered user creates an ad' do
         #byebug
         #assert
         expect(page).to have_content('Escrivaninha')
-        expect(page).to have_content('escritório')
+        expect(page).to have_content('Casa e decoração')
         expect(page).to have_content('Escrivaninha velha porem boa, aceito pagamento em VR')
         expect(page).to have_content('R$ 200,00')
         expect(page).to have_content('Anúncio feito com sucesso!')
@@ -75,7 +75,6 @@ feature 'Registered user creates an ad' do
         click_on 'Velejar pelas ofertas'
         click_on 'Criar novo anúncio'
         fill_in 'Nome do produto',with: ''
-        fill_in 'Categoria',with: ''
         fill_in 'Informações do produto',with: 'Escrivaninha velha porem boa, aceito pagamento em VR'    
         fill_in 'Preço', with: ''
         click_on 'Anunciar'
@@ -109,7 +108,7 @@ feature 'Registered user creates an ad' do
                                     cpf: '39947989810', address: 'Rua Urumajo', role: 'Guardinha', 
                                     company: company_a, user: user)
 
-        ad = Ad.create!(name: 'Escrivaninha', category: 'escritorio',
+        ad = Ad.create!(name: 'Escrivaninha', category: :home_deco,
                         description: 'Velha porem boa', cost: 50, 
                         colaborator: colabo)
                         
@@ -118,16 +117,16 @@ feature 'Registered user creates an ad' do
         #act     
         visit ad_path(ad.id)
         click_on 'Editar anúncio'
-        fill_in 'Nome do produto',with: 'Mesa de centro'
-        fill_in 'Categoria',with: 'Lar'
-        fill_in 'Informações do produto',with: 'Mesa de centro mas pode por nos cantos também'    
+        fill_in 'Nome do produto',with: 'Bola de volei 6.0'
+        choose 'Lazer e esportes'
+        fill_in 'Informações do produto',with: 'Bola oficial da Mikasa'    
         fill_in 'Preço', with: 100
         click_on 'Anunciar'
 
         #assert
-        expect(page).to have_content('Mesa de centro')
-        expect(page).to have_content('Lar')
-        expect(page).to have_content('Mesa de centro mas pode por nos cantos também')
+        expect(page).to have_content('Bola de volei 6.0')
+        expect(page).to have_content('Lazer e esportes')
+        expect(page).to have_content('Bola oficial da Mikasa')
         expect(page).to have_content('R$ 100,00')
         expect(page).to have_content('Alterações salvas com sucesso!')
        
@@ -151,7 +150,7 @@ feature 'Registered user creates an ad' do
                                   cpf: '39947989810', address: 'Rua Urumajo', role: 'Guardinha', 
                                   company: company_a, user: user)
 
-      ad = Ad.create!(name: 'Escrivaninha', category: 'escritorio',
+      ad = Ad.create!(name: 'Creme hidratante', category: :cosmetic,
                       description: 'Velha porem boa', cost: 50, 
                       colaborator: colabo)
                       
