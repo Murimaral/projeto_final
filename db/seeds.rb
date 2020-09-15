@@ -11,6 +11,7 @@
         company_b = Company.create!(name: 'Beta', 
                 cnpj: '24.480.483/5611-63', domain: '@beta.com' )
     
+    #USERS
     user = User.create!( email: 'colaborador@alpha.com',
                 password: '12345678', permission: :colab)
 
@@ -22,6 +23,9 @@
 
     user_d = User.create!( email: 'colaboradord@alpha.com',
                         password: '12345999', permission: :colab)
+
+
+    #COLABORATORS                    
 
 colabo_b = Colaborator.create!(name: 'Guarda Belo', social_name: 'Belo', birth_date: '23/10/1990',
                         cpf: '76094363213', section: 'Vendas', address: 'Rua Icarai', role: 'Guarda Florestal', 
@@ -38,16 +42,46 @@ colabo_d = Colaborator.create!(name: 'Sir Lancelot', social_name: 'Lancelot', bi
                         cpf: '19263609829', section: 'RH',address: 'Rua James', role: 'Profissao Atrapalhar Teste', 
                         company: company_a, user: user_d)
 
-    ad_a = Ad.create!(name: 'Escrivaninha', category: 'escritorio',
+#ADS
+
+    ad_a = Ad.create!(name: 'Escrivaninha', category: :home_deco,
                             description: 'Velha porem boa', cost: 50, 
                             colaborator: colabo)
 
-    ad_b = Ad.create!(name: 'Movel Colonial', category: 'lar',
+    ad_b = Ad.create!(name: 'Movel Colonial', category: :home_deco,
                              description: 'de Acaju', cost: 110, 
                               colaborator: colabo_b)
 
-    ad_c = Ad.create!(name: 'Aparador', category: 'lar',
+    ad_c = Ad.create!(name: 'Aparador', category: :home_deco,
                         description: 'Ta em otimas condiçoes', cost: 50, 
                         colaborator: colabo_c)
 
-    deal = Deal.create!(ad: ad_a, colaborator: colabo_c, address: 'Rua Aurora 45')
+    ad_d = Ad.create!(name: 'Liquidificador', category: :eletrical_app,
+        description: 'Philips Walita', cost: 110, 
+                colaborator: colabo_b)
+
+    ad_e = Ad.create!(name: 'Coleção de mangás', category: :book,
+                   description: 'Ta em otimas condiçoes', cost: 220, 
+                   colaborator: colabo_c)
+    ad_f = Ad.create!(name: 'Conjunto capinhas e peliculas de Cel', category: :tel_cel,
+                             description: 'de Acaju', cost: 40, 
+                              colaborator: colabo_b)
+
+    ad_g = Ad.create!(name: 'Esteira de caminhada', category: :sport,
+                        description: 'Elétrica', cost: 330, 
+                        colaborator: colabo_c)    
+                        
+  #QUESTIONS                      
+
+question_para_a = Question.create!(ask: 'Da pra melhorar isso?', 
+                        ad: ad_a)    
+question_para_a = Question.create!(ask: 'Entrega em Osasco?', 
+ad: ad_a)  
+question_para_a = Question.create!(ask: 'Aceita trocas?', 
+ad: ad_a)  
+
+#DEALS
+
+deal_a_to_c = Deal.create!(ad: ad_a, colaborator: colabo_c, address: 'Rua Aurora 45')
+
+deal_d_to_a = Deal.create!(ad: ad_d, colaborator: colabo, address: 'Rua Conceição 2')

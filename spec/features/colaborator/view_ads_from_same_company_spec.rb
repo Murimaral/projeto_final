@@ -34,15 +34,15 @@ feature 'Colaborator view ads from the same company' do
                                   cpf: '81240267770', address: 'Rua Celso', role: 'Andarilho', 
                                   company: company_a, user: user_c) 
 
-        ad_a = Ad.create!(name: 'Escrivaninha', category: 'escritorio',
+        ad_a = Ad.create!(name: 'Escrivaninha', category: :home_deco,
                         description: 'Velha porem boa', cost: 50, 
                         colaborator: colabo)
 
-        ad_b = Ad.create!(name: 'Movel Colonial', category: 'lar',
+        ad_b = Ad.create!(name: 'Movel Colonial', category: :home_deco,
         description: 'de Acaju', cost: 110, 
         colaborator: colabo_b)
 
-        ad_c = Ad.create!(name: 'Aparador', category: 'sala',
+        ad_c = Ad.create!(name: 'Aparador', category: :home_deco,
                       description: 'Bom pra aparar', cost: 50, 
                       colaborator: colabo_c)
 
@@ -52,11 +52,11 @@ feature 'Colaborator view ads from the same company' do
         visit root_path
         click_on 'Velejar pelas ofertas'
         expect(page).to have_content 'Escrivaninha'
-        expect(page).to have_content 'escritorio'
+        expect(page).to have_content 'Casa e decoração'
         expect(page).to have_content 'Aparador'
-        expect(page).to have_content 'sala'
+        expect(page).to have_content 'Casa e decoração'
         expect(page).not_to have_content 'Movel Colonial'
-        expect(page).not_to have_content 'lar'
+        expect(page).not_to have_content :home_deco
 
     end 
    
@@ -93,15 +93,15 @@ feature 'Colaborator view ads from the same company' do
                                   cpf: '81240267770', address: 'Rua Celso', role: 'Andarilho', 
                                   company: company_a, user: user_c)                            
 
-      ad_a = Ad.create!(name: 'Escrivaninha', category: 'escritorio',
+      ad_a = Ad.create!(name: 'Escrivaninha', category: :home_deco,
                       description: 'Velha porem boa', cost: 50, 
                       colaborator: colabo)
 
-      ad_b = Ad.create!(name: 'Movel Colonial', category: 'lar',
+      ad_b = Ad.create!(name: 'Movel Colonial', category: :home_deco,
       description: 'de Acaju', cost: 110, 
       colaborator: colabo_b)
 
-      ad_c = Ad.create!(name: 'Aparador', category: 'sala',
+      ad_c = Ad.create!(name: 'Aparador', category: :home_deco,
                       description: 'Bom pra aparar', cost: 50, 
                       colaborator: colabo_c)
       
@@ -112,9 +112,8 @@ feature 'Colaborator view ads from the same company' do
       click_on 'Meus anúncios'
       #byebug
       expect(page).to have_content 'Escrivaninha'
-      expect(page).to have_content 'escritorio'
+      expect(page).to have_content 'Casa e decoração'
       expect(page).not_to have_content 'Movel Colonial'
-      expect(page).not_to have_content 'lar'
       expect(page).not_to have_content 'Aparador'
 
 

@@ -39,11 +39,11 @@ feature 'Buyer posts a question about a sellers product' do
                          #description: 'Velha porem boa', cost: 50, 
                          #colaborator: colabo)
 
-            ad_b = Ad.create!(name: 'Movel Colonial', category: 'lar',
+            ad_b = Ad.create!(name: 'Movel Colonial', category: :home_deco,
                              description: 'de Acaju', cost: 110, 
                             colaborator: colabo_b)
 
-            ad_c = Ad.create!(name: 'Aparador', category: 'sala',
+            ad_c = Ad.create!(name: 'Aparador', category: :home_deco,
                                 description: 'Bom pra aparar', cost: 50, 
                               colaborator: colabo_c)
 
@@ -100,11 +100,11 @@ feature 'Buyer posts a question about a sellers product' do
                         company: company_a, user: user_c)                            
 
 
-            ad_b = Ad.create!(name: 'Movel Colonial', category: 'lar',
+            ad_b = Ad.create!(name: 'Movel Colonial', category: :home_deco,
                              description: 'de Acaju', cost: 110, 
                             colaborator: colabo_b)
 
-            ad_c = Ad.create!(name: 'Aparador', category: 'sala',
+            ad_c = Ad.create!(name: 'Aparador', category: :home_deco,
                                 description: 'Bom pra aparar', cost: 50, 
                               colaborator: colabo_c)
 
@@ -158,11 +158,11 @@ feature 'Buyer posts a question about a sellers product' do
                         company: company_a, user: user_c)                            
 
 
-            ad_b = Ad.create!(name: 'Movel Colonial', category: 'lar',
+            ad_b = Ad.create!(name: 'Movel Colonial', category: :home_deco,
                              description: 'de Acaju', cost: 110, 
                             colaborator: colabo_b)
 
-            ad_a = Ad.create!(name: 'Aparador', category: 'sala',
+            ad_a = Ad.create!(name: 'Aparador', category: :home_deco,
                                 description: 'Bom pra aparar', cost: 50, 
                               colaborator: colabo)
             

@@ -5,6 +5,7 @@ class CreatePayments < ActiveRecord::Migration[6.0]
       t.references :colaborator, null: false, foreign_key: true
       t.references :deal, null: false, foreign_key: true
 
+ 
       t.timestamps
     end
   end

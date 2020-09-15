@@ -34,11 +34,11 @@ feature 'Ad owner disables his ad' do
                                        cpf: '81240267770', address: 'Rua Celso', role: 'Andarilho', 
                                        company: company_a, user: user_c)                            
 
-       ad_a = Ad.create!(name: 'Escrivaninha', category: 'escritorio',
+       ad_a = Ad.create!(name: 'Escrivaninha', category: :home_deco,
                            description: 'Velha porem boa', cost: 50, 
                            colaborator: colabo_a)
 
-       ad_b = Ad.create!(name: 'Movel Colonial', category: 'lar',
+       ad_b = Ad.create!(name: 'Movel Colonial', category: :home_deco,
                                 description: 'de Acaju', cost: 110, 
                                  colaborator: colabo_b)
 
@@ -53,7 +53,6 @@ feature 'Ad owner disables his ad' do
        
        #assert
        expect(page).not_to have_content 'Escrivaninha'
-       expect(page).not_to have_content 'escritorio'
        
     end
     scenario 'successfully' do
@@ -89,11 +88,11 @@ feature 'Ad owner disables his ad' do
                                         cpf: '81240267770', address: 'Rua Celso', role: 'Andarilho', 
                                         company: company_a, user: user_c)                            
  
-        ad_a = Ad.create!(name: 'Escrivaninha', category: 'escritorio',
+        ad_a = Ad.create!(name: 'Escrivaninha', category: :home_deco,
                             description: 'Velha porem boa', cost: 50, 
                             colaborator: colabo_a, status: :disab)
  
-        ad_b = Ad.create!(name: 'Movel Colonial', category: 'lar',
+        ad_b = Ad.create!(name: 'Movel Colonial', category: :home_deco,
                                  description: 'de Acaju', cost: 110, 
                                   colaborator: colabo_b)
  
@@ -109,7 +108,6 @@ feature 'Ad owner disables his ad' do
        
         #assert
         expect(page).to have_content 'Escrivaninha'
-        expect(page).to have_content 'escritorio'
         expect(page).to have_content 'Desativar temporariamente'
         expect(page).not_to have_content 'Habilitar anúncio'
     end 
