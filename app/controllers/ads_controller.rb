@@ -52,9 +52,13 @@ class AdsController < ApplicationController
 
    def destroy
       @ad = Ad.find(params[:id])
-      if current_user.colaborator.id == @ad.colaborator.id 
-         @ad.destroy
-         redirect_to ads_path, notice: 'Anúncio apagado com sucesso!'
+      if owner? 
+         if !@ad.sold?
+            @ad.destroy
+            redirect_to ads_path, notice: 'Anúncio apagado com sucesso!'
+         else
+            redirect_to ads_path, notice: 'Não é possível apagar o anúncio de um produto vendido'
+         end
       else
          redirect_to root_path, notice: 'Você não tem permissão para essa ação'
       end 
@@ -67,7 +71,7 @@ class AdsController < ApplicationController
    end
    def disab
       @ad = Ad.find(params[:id])
-      if current_user.colaborator.id == @ad.colaborator.id 
+      if owner?
          @ad.disab!
          redirect_to ads_path, notice: 'Anúncio desabilitado, para desfazer, acesse Meus anúncios e selecione a opção Habilitar anúncio'
       else
@@ -76,7 +80,7 @@ class AdsController < ApplicationController
    end
    def enab
       @ad = Ad.find(params[:id])
-      if current_user.colaborator.id == @ad.colaborator.id 
+      if owner?
          @ad.available!
          redirect_to ads_path, notice: 'Anúncio habilitado'
       else
@@ -124,5 +128,8 @@ def anydeals
       @deal = Deal.find_by(ad: @ad, colaborator: @colaborator)  
    end
 end     
+def owner?
+   current_user.colaborator.id == @ad.colaborator.id 
+end
 
 end

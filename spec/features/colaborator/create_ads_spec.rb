@@ -165,6 +165,75 @@ feature 'Registered user creates an ad' do
 
     end
 
+    scenario 'and tries to destroy a sold-product Ad' do
+
+        #arrange
+        company_a = Company.create!(name: 'Alpha', 
+                         cnpj: '63.297.410/6617-31', domain: '@alpha.com' )
+        company_b = Company.create!(name: 'Beta', 
+        cnpj: '24.480.483/5611-63', domain: '@beta.com' )
+                        
+  
+        user = User.create!( email: 'colaborador@alpha.com',
+        password: '12345678', permission: :colab)
+  
+       
+        login_as user, scope: :user
+        colabo = Colaborator.create!(name: 'Ze Colmeia', social_name: 'Colmeia', birth_date: '13/10/1990',
+                                    cpf: '39947989810', address: 'Rua Urumajo', role: 'Guardinha', 
+                                    company: company_a, user: user)
+  
+        ad = Ad.create!(name: 'Creme hidratante', category: :cosmetic,
+                        description: 'Bom para hidratar', cost: 50, 
+                        colaborator: colabo, status: :sold)
+                        
+       
+        
+        #act     
+        visit root_path
+        click_on 'Velejar pelas ofertas'
+        click_on 'Meus anúncios'
+        
+  
+        expect(page).not_to have_link 'Apagar anúncio'
+        expect(page).to have_content 'Creme hidratante'
+  
+      end
+
+      scenario 'and tries to destroy by malicious path' do
+
+        #arrange
+        company_a = Company.create!(name: 'Alpha', 
+                         cnpj: '63.297.410/6617-31', domain: '@alpha.com' )
+        company_b = Company.create!(name: 'Beta', 
+        cnpj: '24.480.483/5611-63', domain: '@beta.com' )
+                        
+  
+        user = User.create!( email: 'colaborador@alpha.com',
+        password: '12345678', permission: :colab)
+  
+       
+        login_as user, scope: :user
+        colabo = Colaborator.create!(name: 'Ze Colmeia', social_name: 'Colmeia', birth_date: '13/10/1990',
+                                    cpf: '39947989810', address: 'Rua Urumajo', role: 'Guardinha', 
+                                    company: company_a, user: user)
+  
+        ad = Ad.create!(name: 'Creme hidratante', category: :cosmetic,
+                        description: 'Bom para hidratar', cost: 50, 
+                        colaborator: colabo, status: :sold)
+                        
+       
+        
+        #act     
+        visit ad_path(ad)
+        click_on 'Apagar anúncio'
+        
+  
+        expect(page).to have_content 'Não é possível apagar o anúncio de um produto vendido'
+  
+      end
+  
+
     
 end 
 
