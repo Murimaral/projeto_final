@@ -1,6 +1,6 @@
 class DropPaymentsTable < ActiveRecord::Migration[6.0]
   def change
     drop_table :payments 
-    drop_table :ask_answers
+    drop_table :questions
   end
 end

@@ -28,26 +28,20 @@
           null
         ]
       },
-      "/home/murimaral/seal_the_deal/app/models/ad.rb": {
+      "/home/murimaral/seal_the_deal/app/controllers/home_controller.rb": {
         "lines": [
           1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
+          null,
           1,
           null,
           null,
           null,
+          null
+        ]
+      },
+      "/home/murimaral/seal_the_deal/app/controllers/application_controller.rb": {
+        "lines": [
           1,
-          37,
-          null,
-          null,
-          37,
-          null,
           null
         ]
       },
@@ -77,62 +71,6 @@
           null,
           null,
           null,
-          null
-        ]
-      },
-      "/home/murimaral/seal_the_deal/app/models/company.rb": {
-        "lines": [
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          55,
-          1,
-          null,
-          null,
-          null
-        ]
-      },
-      "/home/murimaral/seal_the_deal/app/models/deal.rb": {
-        "lines": [
-          1,
-          1,
-          1,
-          1,
-          1,
-          4,
-          null,
-          null,
-          null
-        ]
-      },
-      "/home/murimaral/seal_the_deal/app/models/payment.rb": {
-        "lines": [
-          1,
-          1,
-          1,
-          null,
-          null,
-          null
-        ]
-      },
-      "/home/murimaral/seal_the_deal/app/controllers/home_controller.rb": {
-        "lines": [
-          1,
-          null,
-          1,
-          null,
-          null,
-          null,
-          null
-        ]
-      },
-      "/home/murimaral/seal_the_deal/app/controllers/application_controller.rb": {
-        "lines": [
-          1,
           null
         ]
       },
@@ -170,6 +108,45 @@
           10,
           0,
           null,
+          null,
+          null
+        ]
+      },
+      "/home/murimaral/seal_the_deal/app/models/company.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          55,
+          1,
+          null,
+          null,
+          null
+        ]
+      },
+      "/home/murimaral/seal_the_deal/app/models/ad.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null,
+          1,
+          37,
+          null,
+          null,
+          37,
           null,
           null
         ]
@@ -306,6 +283,19 @@
           1,
           null,
           null,
+          1,
+          4,
+          null,
+          null,
+          null
+        ]
+      },
+      "/home/murimaral/seal_the_deal/app/models/deal.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          1,
           1,
           4,
           null,
@@ -474,6 +464,16 @@
           null
         ]
       },
+      "/home/murimaral/seal_the_deal/app/models/payment.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          null,
+          null,
+          null
+        ]
+      },
       "/home/murimaral/seal_the_deal/app/controllers/colaborators_controller.rb": {
         "lines": [
           1,
@@ -588,6 +588,6 @@
         }
       }
     },
-    "timestamp": 1600198053
+    "timestamp": 1600473656
   }
 }
